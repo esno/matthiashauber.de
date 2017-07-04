@@ -38,3 +38,19 @@ preparing Makefile:
 ## suspend to ram
 
     echo mem > /sys/power/state
+
+## networking
+
+### client-side
+
+    # gather port range for local/dynamic sockets.
+    sysctl net.ipv4.ip_local_port_range
+    # gather tcp connection timeout. socket is in TIME_WAIT.
+    sysctl net.ipv4.tcp_fin_timeout
+
+    local_port_range / tcp_fin_timeout = sockets per second
+
+### server-side
+
+    # gather the maximum number of requests queued to a listen socket.
+    sysctl net.core.somaxconn
