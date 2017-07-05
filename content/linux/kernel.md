@@ -41,16 +41,18 @@ preparing Makefile:
 
 ## networking
 
-### client-side
+Dealing with the limits of too much concurrent connections.
+
+### outgoing
 
     # gather port range for local/dynamic sockets.
     sysctl net.ipv4.ip_local_port_range
     # gather tcp connection timeout. socket is in TIME_WAIT.
     sysctl net.ipv4.tcp_fin_timeout
 
-    local_port_range / tcp_fin_timeout = sockets per second
+    ip_local_port_range / tcp_fin_timeout = sockets_per_second
 
-### server-side
+### incoming
 
     # gather the maximum number of requests queued to a listen socket.
     sysctl net.core.somaxconn
