@@ -1,6 +1,6 @@
-# systemd builtin network
+# systemd built-in network
 
-## setup dhcp for interface
+## setup dhcp on interface
 
     # /etc/systemd/network/50-dhcp.network
 
