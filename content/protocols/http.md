@@ -2,7 +2,20 @@
 
 connect to a http server by using `telnet` or `openssl s_client` (in case of tls-only server)
 
-# get
+## examples
+
+    # plaintext
+    telnet example.org 80
+    
+    # on embedded systems
+    busybox telnet example.org 80
+    
+    # tls
+    openssl s_client -connect example.org:443
+
+# methods
+
+## get
 
     GET / HTTP/1.1
     host: example.org
