@@ -14,3 +14,9 @@
 
     systemctl start systemd-networkd.service
     systemctl start systemd-resolved.service
+
+## systemd daemon-reexec
+
+when systemd service restart stuck on `systemd-tty-ask-password-agent`
+
+    systemctl daemon-reexec
