@@ -37,33 +37,35 @@ network scanner
 
 ### command
 
-    nmap -oX - -p- -sV 127.0.0.1
+    nmap -oX - -p- --script=banner -sV 127.0.0.1
 
 ### output
 
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE nmaprun>
     <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
-    <!-- Nmap 7.60 scan initiated Tue Aug 29 20:41:58 2017 as: nmap -oX - -p- -sV 127.0.0.1 -->
-    <nmaprun scanner="nmap" args="nmap -oX - -p- -sV 127.0.0.1" start="1504032118" startstr="Tue Aug 29 20:41:58 2017" version="7.60" xmloutputversion="1.04">
-    <scaninfo type="connect" protocol="tcp" numservices="65535" services="1-65535"/>
+    <!-- Nmap 7.60 scan initiated Tue Aug 29 21:24:09 2017 as: nmap -oX - -p- -&#45;script=banner -sV 127.0.0.1 -->
+    <nmaprun scanner="nmap" args="nmap -oX - -p- -&#45;script=banner -sV 127.0.0.1" start="1504034649" startstr="Tue Aug 29 21:24:09 2017" version="7.60" xmloutputversion="1.04">
+    <scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
     <verbose level="0"/>
     <debugging level="0"/>
-    <host starttime="1504032118" endtime="1504032125"><status state="up" reason="conn-refused" reason_ttl="0"/>
+    <host starttime="1504034649" endtime="1504034671"><status state="up" reason="localhost-response" reason_ttl="0"/>
     <address addr="127.0.0.1" addrtype="ipv4"/>
     <hostnames>
     <hostname name="localhost.localdomain" type="PTR"/>
     </hostnames>
     <ports><extraports state="closed" count="65532">
-    <extrareasons reason="conn-refused" count="65532"/>
+    <extrareasons reason="resets" count="65532"/>
     </extraports>
-    <port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="ssh" product="OpenSSH" version="7.5" extrainfo="protocol 2.0" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:7.5</cpe></service></port>
-    <port protocol="tcp" portid="5432"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="postgresql" product="PostgreSQL DB" version="9.6.0 or later" servicefp="************" method="probed" conf="10"><cpe>cpe:/a:postgresql:postgresql</cpe></service></port>
-    <port protocol="tcp" portid="8081"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="http" product="nginx" version="1.12.1" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx:1.12.1</cpe></service></port>
+    <port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="7.5" extrainfo="protocol 2.0" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:7.5</cpe></service><script id="banner" output="SSH-2.0-OpenSSH_7.5"/></port>
+    <port protocol="tcp" portid="5432"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="postgresql" product="PostgreSQL DB" version="9.6.0 or later" servicefp="****" method="probed" conf="10"><cpe>cpe:/a:postgresql:postgresql</cpe></service><script id="fingerprint-strings" output="&#xa;  SMBProgNeg: &#xa;    SFATAL&#xa;    VFATAL&#xa;    C0A000&#xa;    Munsupported frontend protocol 65363.19778: server supports 1.0 to 3.0&#xa;    Fpostmaster.c&#xa;    L2023&#xa;    RProcessStartupPacket"><elem key="SMBProgNeg">&#xa;    SFATAL&#xa;    VFATAL&#xa;    C0A000&#xa;    Munsupported frontend protocol 65363.19778: server supports 1.0 to 3.0&#xa;    Fpostmaster.c&#xa;    L2023&#xa;    RProcessStartupPacket</elem>
+    </script></port>
+    <port protocol="tcp" portid="8081"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="nginx" version="1.12.1" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx:1.12.1</cpe></service><script id="http-server-header" output="nginx/1.12.1"><elem>nginx/1.12.1</elem>
+    </script></port>
     </ports>
-    <times srtt="23" rttvar="15" to="100000"/>
+    <times srtt="4" rttvar="0" to="100000"/>
     </host>
-    <runstats><finished time="1504032125" timestr="Tue Aug 29 20:42:05 2017" elapsed="6.79" summary="Nmap done at Tue Aug 29 20:42:05 2017; 1 IP address (1 host up) scanned in 6.79 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+    <runstats><finished time="1504034671" timestr="Tue Aug 29 21:24:31 2017" elapsed="21.86" summary="Nmap done at Tue Aug 29 21:24:31 2017; 1 IP address (1 host up) scanned in 21.86 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
     </runstats>
     </nmaprun>
 
