@@ -2,11 +2,14 @@
 
 network scanner
 
-## commands
+## discover all A/AAAA records of a domain
 
-### discover all A/AAAA records of a domain
+### command
 
     nmap -oX - -sn --script=resolveall --script-args=newtargets,resolveall.hosts=example.org
+    
+### output
+
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE nmaprun>  
     <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
@@ -30,9 +33,14 @@ network scanner
     </runstats>
     </nmaprun>
 
-### probe all ports and discover service
+## probe all ports and discover service
+
+### command
 
     nmap -oX - -p- -sV 127.0.0.1
+
+### output
+
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE nmaprun>
     <?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
