@@ -20,3 +20,11 @@
 when systemd service restart stuck on `systemd-tty-ask-password-agent`
 
     systemctl daemon-reexec
+
+## coredumps
+
+    # coredump config
+    /etc/systemd/coredump.conf.d/
+    
+    # destination
+    /var/lib/systemd/coredump
