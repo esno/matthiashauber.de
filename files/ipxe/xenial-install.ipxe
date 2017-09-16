@@ -1,7 +1,6 @@
 #!ipxe
 dhcp
 set base-url http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64
-kernel ${base-url}/linux
+kernel ${base-url}/linux vga=normal fb=false
 initrd ${base-url}/initrd.gz
-append vga=normal fb=false
 boot
