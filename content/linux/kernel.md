@@ -35,6 +35,13 @@ preparing Makefile:
     echo -n "xxxx:yyyy:zzzz.aaaa" > /sys/bus/hid/drivers/generic-usb/unbind
     echo -n "xxxx:yyyy:zzzz.aaaa" > /sys/bus/hid/drivers/hid-foo/bind
 
+## coredumps
+
+    cat /proc/sys/kernel/core_pattern
+    |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %e
+
+command/location to store coredump files
+
 ## suspend to ram
 
     echo mem > /sys/power/state
