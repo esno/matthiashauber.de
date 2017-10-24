@@ -1,7 +1,5 @@
 # nmap
 
-network scanner
-
 ## discover all A/AAAA records of a domain
 
 ### command
