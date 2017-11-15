@@ -12,5 +12,5 @@ how to use oldschool interface names
     # since v209
     ln -s /dev/null /etc/udev/rules.d/80-net-setup-link.rules
     
-    # before v209
+    # before v209 / eudev
     ln -s /dev/null /etc/udev/rules.d/80-net-name-slot.rules
