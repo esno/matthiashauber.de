@@ -1,5 +1,10 @@
 # git
 
+## patches
+
+    # create patches
+    git format-patch -<n> HEAD
+
 ## tags
 
     # add tag
