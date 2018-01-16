@@ -18,9 +18,16 @@ have a look to the first for characters of the serial number and compare to this
     Kindle 8: B018
     Kindle Oasis: G0B0G
     
-## upgrade/downgrade to firmware version 5.3.5
+## upgrade/downgrade
 
-download this [firmware](http://s3.amazonaws.com/G7G_FirmwareUpdates_WebDownloads/update_kindle_5.3.5.bin?tag=823814-20) and flash
-via Kindle's update mechanism (Menu -> Update your Kindle)
+download firmware before **5.8.2.1** from 
 
-> device should be in airplane mode
+    http://s3.amazonaws.com/G7G_FirmwareUpdates_WebDownloads/update_kindle_<version>.bin
+
+and after **5.8.2** from
+
+    https://s3.amazonaws.com/firmwaredownloads/update_kindle_paperwhite_v2_<version>.bin
+
+flash via Kindle's update mechanism (Menu -> Update your Kindle)
+
+> device should be in airplane mode to prevent an update over the air
