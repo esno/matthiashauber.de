@@ -31,3 +31,20 @@ and after **5.8.2** from
 flash via Kindle's update mechanism (Menu -> Update your Kindle)
 
 > device should be in airplane mode to prevent an update over the air
+
+## jailbreak
+
+the jailbreak works with version 5.6.5
+
+### howto
+
+* backup the device
+* factory reset
+* enable airplane mode
+* downgrade/upgrade to 5.6.5
+* copy [jb](https://github.com/esno/kindle-pw2-5.6.5-jailbreak/raw/master/src/jb) at root of your kindle
+* touch `WIFI_NO_NET_PROBE` at root of your kindle
+* reboot
+* invoke the jailbreak (see [howto](https://github.com/esno/kindle-pw2-5.6.5-jailbreak/blob/master/README.md)
+
+the jailbreak is now temporarily in place.
