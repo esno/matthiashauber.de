@@ -4,19 +4,44 @@
 
 have a look to the first for characters of the serial number and compare to this list:
 
-    Kindle (2007): Booo
-    Kindle 2 (2009): B002, B003
-    Kindle DX (2010): B004, B005, B009
-    Kindle Keyboard (2010): B006, B008, B00A
-    Kindle 4 (2011): B00E, B023, 9023
-    Kindle 5 / Touch (2012): B00F, B010, B011, B012
-    Kindle Paperwhite (2012): B024, B01B, B01C, B01D, B01F, B020
-    Kindle Paperwhite 2 (2013): B0D4, 90D4, B0D5, 90D5, B0D6, 90D6, B0D7, 90D7, B0D8, 90D8, B0F2, 90F2, B017, 9017, B060, 9060, B062, 9062, B05F, 905F
-    Kindle 7 (2014): B001, B0C6, 90C6, B0DD, 90DD
-    Kindle Voyage (2014): B00I, B013, B053, B054
-    Kindle Paperwhite 3 (2015): G090
-    Kindle 8: B018
-    Kindle Oasis: G0B0G
+| Kindle (2007) | Kindle 2 (2009) | Kindle DX (2010) | Kindle Keyboard (2010) |
+| ------------- | --------------- | ---------------- | ---------------------- |
+| Booo          | B002            | B004             | B006                   |
+|               | B003            | B005             | B008                   |
+|               |                 | B009             | B00A                   |
+
+
+| Kindle 4 (2011) | Kindle 5 / Touch (2012) | Kindle Paperwhite (2012) | Kindle Paperwhite 2 (2013) |
+| --------------- | ----------------------- | ------------------------ | -------------------------- |
+| B00E            | B00F                    | B024                     | B0D4                       |
+| B023            | B010                    | B01B                     | 90D4                       |
+| 9023            | B011                    | B01C                     | B0D5                       |
+|                 | B012                    | B01D                     | 90D5                       |
+|                 |                         | B01F                     | B0D6                       |
+|                 |                         | B020                     | 90D6                       |
+|                 |                         |                          | B0D7                       |
+|                 |                         |                          | 90D7                       |
+|                 |                         |                          | B0D8                       |
+|                 |                         |                          | 90D8                       |
+|                 |                         |                          | B0F2                       |
+|                 |                         |                          | 90F2                       |
+|                 |                         |                          | B017                       |
+|                 |                         |                          | 9017                       |
+|                 |                         |                          | B060                       |
+|                 |                         |                          | 9060                       |
+|                 |                         |                          | B062                       |
+|                 |                         |                          | 9062                       |
+|                 |                         |                          | B05F                       |
+|                 |                         |                          | 905F                       |
+
+
+| Kindle 7 (2014) | Kindle Voyage (2014) | Kindle Paperwhite 3 (2015) | Kindle 8 (2016) | Kindle Oasis |
+| --------------- | -------------------- | -------------------------- | --------------- | ------------ |
+| B001            | B00I                 | G090                       | B018            | G0B0G        |
+| B0C6            | B013                 |                            |                 |              |
+| 90C6            | B053                 |                            |                 |              |
+| B0DD            | B054                 |                            |                 |              |
+| 90DD            |                      |                            |                 |              |
     
 ## upgrade/downgrade
 
