@@ -28,9 +28,13 @@ the VR application has to be named 'main.lua'
 
 ### build lovr-webvr
 
+    # official repo
     $ git clone https://github.com/bjornbytes/lovr.git
+    # see https://github.com/bjornbytes/lovr/pull/33
+    $ git clone https://github.com/esno/lovr.git -b webvr_fix
     $ cd lovr && mkdir build && cd build
     $ ${EMSCRIPTEN_PATH}/emcmake cmake ..
+    $ python ${EMSCRIPTEN_PATH}/embuilder.py build binaryen
     $ ${EMSCRIPTEN_PATH}/emmake make -j2
 
 ### generate webvr application
