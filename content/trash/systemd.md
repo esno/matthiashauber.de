@@ -1,4 +1,4 @@
-# systemd built-in network
+# systemd
 
 ## setup dhcp on interface
 
@@ -28,3 +28,10 @@ when systemd service-restart stucks on `systemd-tty-ask-password-agent`
     
     # destination
     /var/lib/systemd/coredump
+
+## lid close event handling
+
+    # /etc/systemd/logind.conf
+    HandleLidSwitch=ignore
+
+    systemctl restart systemd-logind.service
