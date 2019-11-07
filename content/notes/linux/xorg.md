@@ -10,6 +10,6 @@ then the one requested.
 
 ### feature matrix
 
-| version | NameWindowPixmap |
-| ------- | ---------------- |
-| 0.2     | x                |
+    | version | NameWindowPixmap |
+    | ------- | ---------------- |
+    | 0.2     | x                |
