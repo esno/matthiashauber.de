@@ -30,6 +30,15 @@ preparing Makefile:
 
 # beating the kernel
 
+## magic sysrq's
+
+Press `Alt`+`SysRq`
+
+> `SysRq` is often located at `Print`
+
+* `space` = print summary of available SysRq keys
+* `m` = print the current memory information to the console
+
 ## unbind/bind hardware to/from modules
 
     echo -n "xxxx:yyyy:zzzz.aaaa" > /sys/bus/hid/drivers/generic-usb/unbind
