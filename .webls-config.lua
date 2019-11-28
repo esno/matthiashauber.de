@@ -26,5 +26,6 @@ return {
     ["bg-sidebar"]  = "#2e2d2b",
     ["fg-page"]     = "#000000",
     ["fg-sidebar"]  = "#ffffff",
+    ["customcss"]   = "";
   },
 }
