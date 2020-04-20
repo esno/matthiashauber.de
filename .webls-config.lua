@@ -4,6 +4,7 @@ return {
   description = "echo m > /proc/sysrq-trigger",
   website     = "https://matthiashauber.de",
   cname       = "matthiashauber.de",
+  head        = "../.head.html",
 
   -- add "index.html" to the end of each link
   pagesuffix  = nil,
