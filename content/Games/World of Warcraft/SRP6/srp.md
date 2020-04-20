@@ -5,6 +5,8 @@ Based on the logic of SRP the server-side never requires a password in cleartext
 Neither on registration nor on authentication.
 The server side requires only a 32 bytes large salt as well as the password verifier.
 
+An example implementation for golang is available at [github](https://github.com/blizzlike-org/wowpasswd).
+
 ## compute the password verifier
 
 OpenSSL bignum provides all the necessary tooling to compute all SRP related values.
