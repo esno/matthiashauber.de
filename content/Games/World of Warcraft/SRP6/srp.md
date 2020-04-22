@@ -23,7 +23,7 @@ The formula for password verifier `v` is defined as
 
     v = g^x % N
 
-Where `N` is a large safe prime and `g` is a generator module N.
+Where `N` is a large safe prime and `g` is a generator modulo N.
 Computing large safe prime numbers may take a lot of time that's why most
 WoW emulators are using hardcoded values for that.
 So Let's reuse the values from [mangos](https://getmangos.eu)-based cores.
