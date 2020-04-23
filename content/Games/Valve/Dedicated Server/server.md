@@ -83,7 +83,7 @@ Additionally create a file `/etc/default/srcds-${STEAMPORT}` and set the variabl
 
 ## hlds server configuration
 
-For the generic server configuration create a new `${STEAMENGINE}/server.cfg`
+For the generic server configuration create a new `server.cfg`
 
     # region (3 = europe)
     sv_region 3
@@ -99,7 +99,7 @@ For the generic server configuration create a new `${STEAMENGINE}/server.cfg`
 
 ## srcds server configuration
 
-For the generic server configuration create a new `${STEAMENGINE}/cfg/server.cfg`
+For the generic server configuration create a new `cfg/server.cfg`
 
     # local or public
     sv_lan 0
