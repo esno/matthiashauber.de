@@ -28,6 +28,8 @@ Now you're ready to fetch the dedicated server software
       +force_install_dir /var/lib/steam/server/counter-strike_source/27015 \
       +app_update 232330 +quit
 
+## start server
+
 To run the dedicated server just create a [systemd service file](https://github.com/flakispace/ops/blob/master/steam/css%40.service).
 
     wget https://github.com/flakispace/ops/raw/master/steam/css%40.service -O /etc/systemd/system/css\@.service
@@ -38,3 +40,22 @@ If you want to change default map or max players just create `/etc/default/count
 
     CSS_MAP=de_dust2
     CSS_MAXPLAYER=16
+
+## server configuration
+
+For the generic server configuration create `cstrike/cfg/server.cfg`
+
+    # local or public
+    sv_lan 0
+
+    # region (3 = europe)
+    sv_region 3
+
+    # name of server
+    hostname "my awesome cstrike server"
+
+    # password
+    sv_password "hello world"
+
+    # rcon password
+    rcon_password "do not share"
