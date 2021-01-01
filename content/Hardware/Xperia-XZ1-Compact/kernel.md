@@ -32,7 +32,7 @@
 
     cp arch/arm64/boot/Image.gz-dtb ~/aosp/kernel/sony/msm-4.14/common-kernel/kernel-dtb-lilac
 
-## create new boot.img
+## create boot.img
 
     $ source build/envsetup.sh && lunch
     including vendor/qcom/opensource/core-utils/vendorsetup.sh

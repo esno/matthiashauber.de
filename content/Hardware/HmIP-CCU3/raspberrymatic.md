@@ -4,7 +4,7 @@ download the latest ccu3 image from https://github.com/jens-maus/RaspberryMatic/
 and navigate to your CCU3 webui at `Settings` -> `Control Panel` -> `CCU maintenance`.
 At `RaspMatic software` select `Choose File` and follow the default firmware update procedure.
 
-> RaspberryMatic-<version>-ccu3.tgz (only for initial CCU3 Firmware -> RaspberryMatic Upgrade)
+> RaspberryMatic-${version}-ccu3.tgz (only for initial CCU3 Firmware -> RaspberryMatic Upgrade)
 
 # configure wireguard
 
