@@ -1,29 +1,9 @@
 # Setup a dedicated server
 
-This guide depends on ubuntu servers, for other distros it should be similar but package names may differ.
-Install prerequirements
+To run a CS or DoD server ensure that SteamCMD is installed.
+A installation guide can be found [here](../SteamCMD).
 
-    apt-get update
-    apt-get install wget lib32gcc1 libc6-i386
-
-Create a new user which will run the server processes
-
-    useradd -d /opt/steam -m -s /bin/bash -u 99 -U steam
-
-Fetch the `steamcmd` runtime for linux
-
-    su -l steam
-    mkdir /opt/steam/steamcmd && cd /opt/steam/steamcmd
-    wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
-    tar xzf steamcmd_linux.tar.gz
-    exit
-
-    ln -s /opt/steamcmd/steam.sh /usr/local/bin/
-    ln -s /opt/steamcmd/steamcmd.sh /usr/local/bin/
-    ln -s /opt/steamcmd/linux32 /usr/local/bin
-
-To install a dedicated server you need to find the right steam app id of the dedicated server.
-Here's a list of well-known games
+## Steam App IDs
 
     | Name                   | Game    | Engine | AppId  |
     | ---------------------- | ------- | ------ | ------ |
@@ -31,7 +11,7 @@ Here's a list of well-known games
     | Counter-Strike: Source | cstrike | srcds  | 232330 |
     | Day of Defeat: Source  | dod     | srcds  | 232290 |
 
-Now you're ready to fetch the dedicated server software
+## fetch dedicated server software
 
     mkdir -p /opt/{hlds,srcds}
     chown steam:steam /opt/{hlds,srcds}
@@ -47,9 +27,9 @@ Now you're ready to fetch the dedicated server software
 
 ## start hlds server
 
-To run the dedicated server just create a [systemd service file](https://github.com/flakispace/ops/blob/master/steam/hlds%40.service).
+To run the dedicated server just create a [systemd service file](https://github.com/flakispace/ops/blob/master/applications/steam/hlds%40.service).
 
-    wget https://github.com/flakispace/ops/raw/master/steam/hlds%40.service -O /etc/systemd/system/hlds\@.service
+    wget https://github.com/flakispace/ops/raw/master/applications/steam/hlds%40.service -O /etc/systemd/system/hlds\@.service
 
     export STEAMPORT="27015"
 
@@ -65,9 +45,9 @@ Additionally create a file `/etc/default/hlds-${STEAMPORT}` and set the variable
 
 ## start srcds server
 
-To run the dedicated server just create a [systemd service file](https://github.com/flakispace/ops/blob/master/steam/srcds%40.service).
+To run the dedicated server just create a [systemd service file](https://github.com/flakispace/ops/blob/master/applications/steam/srcds%40.service).
 
-    wget https://github.com/flakispace/ops/raw/master/steam/srcds%40.service -O /etc/systemd/system/srcds\@.service
+    wget https://github.com/flakispace/ops/raw/master/applications/steam/srcds%40.service -O /etc/systemd/system/srcds\@.service
 
     export STEAMPORT="27015"
 
