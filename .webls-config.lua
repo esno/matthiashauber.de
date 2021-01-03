@@ -19,13 +19,13 @@ return {
 
   -- define default colors
   colors      = {
-    ["accent"]      = "#0269a4",
-    ["border"]      = "#444444",
-    ["bg-page"]     = "#444444",
-    ["bg-content"]  = "#ffffff",
-    ["bg-sidebar"]  = "#2e2d2b",
-    ["fg-page"]     = "#000000",
-    ["fg-sidebar"]  = "#ffffff",
-    ["customcss"]   = ":not(pre) > code { background-color: #eeeeee; color: #000000; }";
+    ["accent"]      = "#7bb794",
+    ["border"]      = "#1f2933",
+    ["bg-page"]     = "#1f2933",
+    ["bg-content"]  = "#3e4c59",
+    ["bg-sidebar"]  = "#1f2933",
+    ["fg-page"]     = "#f5f7fa",
+    ["fg-sidebar"]  = "#f5f7fa",
+    ["customcss"]   = ":not(pre) > code { padding: 3px; }";
   },
 }
