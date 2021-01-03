@@ -10,7 +10,7 @@ Which in fact took me a lot of time for maintenance and debugging but lead to
 the fact that I learned so much about software packaging/lifecycle
 and debugging system internals.
 
-Since I am hired as a linux system architect I profit a lot from my
+Since I am hired as an embedded software developer I profit a lot from my
 taken experience which I gathered within different opensource communities.
 And that's why I want to share some snippets of my knowledge and push back
 as much code as possible.
