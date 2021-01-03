@@ -1,4 +1,9 @@
-# authentication
+# World of Warcraft
+
+This section ships information and internals of the well-known World of Warcraft.
+All information provided has to be understood from an educational point of view.
+
+## authentication
 
 The world of warcraft clients using a custom version of [SRP6](http://srp.stanford.edu/whatisit.html) (Secure Remote Password protocol).
 Based on the logic of SRP the server-side never requires a password in cleartext.
@@ -32,7 +37,8 @@ So Let's reuse the values from [mangos](https://getmangos.eu)-based cores.
     g = 7
 
 Those values are passed to the client therefore you can select whatever secure prime you prefer.
-Changing such values afterwards will break already computed password verifiers.
+
+> Changing such values afterwards will break already computed password verifiers.
 
 The value for `x` will be a sha1 hash of salt and the password `p`
 
