@@ -1,7 +1,8 @@
 # flash RaspberryMatic
 
-download the latest ccu3 image from https://github.com/jens-maus/RaspberryMatic/releases
+download the latest ccu3 image from [github](https://github.com/jens-maus/RaspberryMatic/releases)
 and navigate to your CCU3 webui at `Settings` -> `Control Panel` -> `CCU maintenance`.
+
 At `RaspMatic software` select `Choose File` and follow the default firmware update procedure.
 
 > RaspberryMatic-${version}-ccu3.tgz (only for initial CCU3 Firmware -> RaspberryMatic Upgrade)
