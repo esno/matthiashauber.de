@@ -1,0 +1,3 @@
+[submodule "content/Hardware/Xperia XZ1 Compact"]
+	path = content/Hardware/Xperia XZ1 Compact
+	url = https://github.com/esno/xperia-xz1-compact.git
