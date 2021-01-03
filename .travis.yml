@@ -8,7 +8,7 @@ addons:
       - lua-filesystem
 
 script:
-  - git clone --recursive https://github.com/esno/webls.git -b customhead .webls
+  - git clone --recursive https://github.com/shagu/webls.git .webls
   - cp -f .webls-config.lua .webls/config.lua || true
   - rm -r .webls/content
   - cp -r content .webls/content

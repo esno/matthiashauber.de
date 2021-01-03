@@ -1,10 +1,9 @@
 return {
   -- generic website options
   title       = "matthiashauber",
-  description = "echo m > /proc/sysrq-trigger",
+	description = "open-source tech stuff",
   website     = "https://matthiashauber.de",
   cname       = "matthiashauber.de",
-  head        = "../.head.html",
 
   -- add "index.html" to the end of each link
   pagesuffix  = nil,
@@ -21,12 +20,12 @@ return {
   -- define default colors
   colors      = {
     ["accent"]      = "#0269a4",
-    ["border"]      = "#eeeeee",
-    ["bg-page"]     = "#eeeeee",
+    ["border"]      = "#444444",
+    ["bg-page"]     = "#444444",
     ["bg-content"]  = "#ffffff",
     ["bg-sidebar"]  = "#2e2d2b",
     ["fg-page"]     = "#000000",
     ["fg-sidebar"]  = "#ffffff",
-    ["customcss"]   = "";
+    ["customcss"]   = ":not(pre) > code { background-color: #eeeeee; color: #000000; }";
   },
 }
