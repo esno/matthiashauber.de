@@ -1,4 +1,11 @@
-# flash RaspberryMatic
+# HmIP-CCU3
+
+## About
+
+    Hardware    : BCM2835
+    Model       : Raspberry Pi 3 Model B Rev 1.2
+
+## Install RaspberryMatic
 
 download the latest ccu3 image from [github](https://github.com/jens-maus/RaspberryMatic/releases)
 and navigate to your CCU3 webui at `Settings` -> `Control Panel` -> `CCU maintenance`.
@@ -7,14 +14,15 @@ At `CCU software` select `Choose File` and follow the default firmware update pr
 
 > RaspberryMatic-${version}-ccu3.tgz (only for initial CCU3 Firmware -> RaspberryMatic Upgrade)
 
-# configure wireguard
+### Configure wireguard
 
     mkdir /usr/local/etc/config/wireguard
-    cd /usr/local/etc/config/wireguard
+    icd /usr/local/etc/config/wireguard
+
     wg genkey | tee private.key | wg pubkey > public.key && chmod 0600 *.key
     vim wg0.conf
 
-## auto-start wireguard
+#### Start wireguard
 
     cat > /usr/local/etc/rc.local <<EOF
     #!/bin/sh
