@@ -1,3 +1,6 @@
 [submodule "content/Hardware/Xperia XZ1 Compact"]
 	path = content/Hardware/Xperia XZ1 Compact
 	url = https://github.com/esno/xperia-xz1-compact.git
+[submodule "content/Hardware/Lenovo Yoga Slim 7/BIOS unlock"]
+	path = content/Hardware/Lenovo Yoga Slim 7/BIOS unlock
+	url = https://github.com/esno/yoga-bios-unlock
