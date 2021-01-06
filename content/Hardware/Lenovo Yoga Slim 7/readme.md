@@ -80,7 +80,7 @@ Those files can be extracted with `innoextract`
 
 ### Reverse engineering
 
-We need to discover which kind of BIOS is in place for our Yoga device.
+We need to discover what kind of BIOS is in place for our Yoga device.
 Linux kernel provides a DMI interface in sysfs that shows some manufacturer specific strings.
 Let's check `/sys/class/dmi/id/bios_*`
 
