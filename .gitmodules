@@ -3,4 +3,7 @@
 	url = https://github.com/esno/xperia-xz1-compact.git
 [submodule "content/Hardware/Lenovo Yoga Slim 7/BIOS unlock"]
 	path = content/Hardware/Lenovo Yoga Slim 7/BIOS unlock
-	url = https://github.com/esno/yoga-bios-unlock
+	url = https://github.com/esno/yoga-bios-unlock.git
+[submodule "content/Software/rluksd"]
+	path = content/Software/rluksd
+	url = https://github.com/esno/rluksd.git
