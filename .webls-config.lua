@@ -16,6 +16,9 @@ return {
 
   -- modules that should be used for parsing
   modules     = { "html", "markdown", "gallery", "download", "footer" },
+  extensions  = {
+    markdown = { ".md" }
+  },
 
   -- define default colors
   colors      = {
