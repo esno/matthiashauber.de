@@ -7,3 +7,6 @@
 [submodule "content/Software/rluksd"]
 	path = content/Software/rluksd
 	url = https://github.com/esno/rluksd.git
+[submodule "content/Software/lua-lsw"]
+	path = content/Software/lua-lsw
+	url = https://github.com/esno/lua-lsw.git
