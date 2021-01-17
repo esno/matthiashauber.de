@@ -21,6 +21,9 @@ return {
   markdown = {
     extensions = { ".md" }
   },
+  gallery = {
+    extensions = { ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg" }
+  },
 
   -- define default colors
   colors      = {
