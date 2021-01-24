@@ -1,14 +1,16 @@
-# useful tools
+# Kernel
+
+## Useful tools
 
 * [elixir](http://elixir.free-electrons.com/linux/latest/source)
 
-# writing modules
+## Writing modules
 
 preparing kernel source:
 
     git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
     git checkout <version>
-    git checkout -b <your-feature-branch>
+    git checkout -b <your-branch>
 
 preparing menuconfig:
 
@@ -28,9 +30,9 @@ preparing Makefile:
 
     obj-$(CONFIG_YOUR_STRING)		+= your-cfile.o
 
-# beating the kernel
+## Beating the kernel
 
-## magic sysrq's
+### Magic sysrq's
 
 Press `Alt`+`SysRq`
 
@@ -39,27 +41,27 @@ Press `Alt`+`SysRq`
 * `space` = print summary of available SysRq keys
 * `m` = print the current memory information to the console
 
-## unbind/bind hardware to/from modules
+### Unbind/Bind hardware to/from modules
 
     echo -n "xxxx:yyyy:zzzz.aaaa" > /sys/bus/hid/drivers/generic-usb/unbind
     echo -n "xxxx:yyyy:zzzz.aaaa" > /sys/bus/hid/drivers/hid-foo/bind
 
-## coredumps
+### Coredumps
 
     cat /proc/sys/kernel/core_pattern
     |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %e
 
 command/location to store coredump files
 
-## suspend to ram
+### Suspend to ram
 
     echo mem > /sys/power/state
 
-## networking
+### Networking
 
 Dealing with the limits of too much concurrent connections.
 
-### outgoing
+#### Outgoing
 
     # gather port range for local/dynamic sockets.
     sysctl net.ipv4.ip_local_port_range
@@ -68,7 +70,7 @@ Dealing with the limits of too much concurrent connections.
 
     ip_local_port_range / tcp_fin_timeout = sockets_per_second
 
-### incoming
+#### Incoming
 
     # gather the maximum number of requests queued to a listen socket.
     sysctl net.core.somaxconn
