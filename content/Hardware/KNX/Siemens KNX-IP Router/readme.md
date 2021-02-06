@@ -1,6 +1,6 @@
 # Siemens KNX-IP Router
 
-The Siemens KNX-IP Router (5WG1 146-1AB02) is a
+The Siemens KNX-IP Router (`5WG1 146-1AB02`) is a
 bridge to KNX networks.
 
 Right now there are two known methods available to
@@ -23,10 +23,10 @@ much about how to send messages to all members in your network.
 
 ## Trivia
 
-The IP router has to be configured to a multicast IP address (e.g. 224.0.23.12)
+The IP router has to be configured to a multicast IP address (e.g. `224.0.23.12`)
 and a static IP or DHCP assigned.
 
-The default port for the KNXnet/IP protocol is 3671/udp.
+The default port for the KNXnet/IP protocol is `3671/udp`.
 
 ## Protocol
 
