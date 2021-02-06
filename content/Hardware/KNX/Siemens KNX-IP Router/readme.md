@@ -28,6 +28,52 @@ and a static IP or DHCP assigned.
 
 The default port for the KNXnet/IP protocol is `3671/udp`.
 
+## Reverse Engineering
+
+While watching into the protocol I had access to a Siemens S7-1200
+which does not support multicast.
+
+Before we found the direct link interface we had to workaround the missing
+multicast layer. Therefore we used a Linux Computer with two network interfaces,
+linked them into a network bridge and connected it between the S7 and the IP Router.
+
+    $ brctl addbr knx0
+    $ brctl addif knx0 enp3s0f3u1u2u3
+    $ brctl addif knx0 enp3s0f3u1u2u1
+    $ brctl show
+    bridge name   bridge id             STP enabled     interfaces
+    knx0          8000.a69caebd4e66     no              enp3s0f3u1u2u1
+                                                        enp3s0f3u1u2u3
+
+    $ ip a add 192.168.9.250/24 dev knx0
+    $ ip r add to 224.0.23.12 dev knx0
+
+This setup provides the ability to capture the whole network traffic
+between the IP Router and other network devices.
+Additionally I wrote a stupid proxy to translate upd datagrams into
+multicast messages
+
+    #!/usr/bin/python
+
+    import socket
+
+    UDP_ADDR = '192.168.9.250'
+    MCAST_GRP = '224.0.23.12'
+    MCAST_PORT = 3671
+    
+    mcast = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    mcast.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    mcast.bind((MCAST_GRP, MCAST_PORT))
+    
+    udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    udp.bind((UDP_ADDR, MCAST_PORT))
+    
+    while (True):
+      buffer = udp.recvfrom(1024)
+      size = mcast.sendto(buffer[0], (MCAST_GRP, MCAST_PORT))
+      print("sent: %d" % (size))
+
 ## Protocol
 
 ### Header
