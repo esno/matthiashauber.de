@@ -28,14 +28,11 @@ and a static IP or DHCP assigned.
 
 The default port for the KNXnet/IP protocol is `3671/udp`.
 
-## Reverse Engineering
+## Multicast vs direct connection
 
-While watching into the protocol I had access to a Siemens S7-1200
-which does not support multicast.
-
-Before we found the direct link interface we had to workaround the missing
-multicast layer. Therefore we used a Linux Computer with two network interfaces,
-linked them into a network bridge and connected it between the S7 and the IP Router.
+Since we want to know what's send on the wire I used a Linux machine with two
+network interfaces, linked into a network bridge and connected between the
+IP Router and the rest of the devices in the network.
 
     $ brctl addbr knx0
     $ brctl addif knx0 enp3s0f3u1u2u3
@@ -50,7 +47,13 @@ linked them into a network bridge and connected it between the S7 and the IP Rou
 
 This setup provides the ability to capture the whole network traffic
 between the IP Router and other network devices.
-Additionally I wrote a stupid proxy to translate upd datagrams into
+
+While watching into the protocol I had access to a Siemens S7-1200
+which does not support multicast.
+
+The IP router did neither respond nor react to telegrams sent
+to the device IP directly. To see if the IP Router responds only to
+multicast requests I wrote a stupid proxy to translate those udp datagrams into
 multicast messages
 
     #!/usr/bin/python
@@ -74,55 +77,18 @@ multicast messages
       size = mcast.sendto(buffer[0], (MCAST_GRP, MCAST_PORT))
       print("sent: %d" % (size))
 
-## Protocol
+This test proved that our first telegram was properly and the IP router seems to only
+respond on multicast.
 
-### Header
+But there's more. The router accepts directly addressed datagrams as well if you deal
+properly with the "tunnel interface".
+In case you have to use a direct connection to a KNX-IP router your software stack
+has to request a tunnel/channel where telegrams can be send and forwwarded/tunneled
+by the router within the multicast domain.
 
-    | length | version | identifier | Total length |
-    | 1 byte | 1 byte  | 2 byte     | 2 byte       |
+Such channel will be assigned on a tunnel request to the IP router and announced in
+it's response. There may multiple channels to be handled since a connection request
+will use a different channel than a configuration request.
 
-#### Length
-
-Length is the size of the header within the UDP datagram.
-
-#### Version
-
-Describes the protocol version that is used.
-
-Known versions:
-
-    | hex  | version |
-    | ---- | ------- |
-    | 0x10 | 1.0     |
-
-#### Identifier
-
-The identifier (also known as Service Identifier) defines the message type
-that is sent.
-
-Known identifier:
-
-    | hex    | type                          |
-    | ------ | ----------------------------- |
-    | 0x0201 | Search Request                |
-    | 0x0202 | Search Response               |
-    | 0x0203 | Description Request           |
-    | 0x0204 | Description Response          |
-    | 0x0205 | Connect Request               |
-    | 0x0206 | Connect Response              |
-    | 0x0207 | Connection State Request      |
-    | 0x0208 | Connection State Response     |
-    | 0x0209 | Disconnect Request            |
-    | 0x020a | Disconnect Response           |
-    | 0x020b | Search Request Extended       |
-    | 0x0310 | Configuration Request         |
-    | 0x0311 | Configuration Acknowledgement |
-    | 0x0420 | Tunneling Request             |
-    | 0x0421 | Tunneling Acknowledgement     |
-    | 0x0530 | Routing Indication            |
-
-#### Total length
-
-The total length describes the length of the whole UDP datagram (incl. header).
-
-> payload length = total length - header length
+Long story short: Multicast requests are much simpler than connecting directly to an
+IP router because direct connections require more logic in your application stack.
