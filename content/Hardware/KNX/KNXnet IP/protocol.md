@@ -1,5 +1,11 @@
 # KNXnet/IP
 
+KNXnet/IP is a UDP/multicast based protocol. It's default port is `3671`.
+It's used to connect and extend KNX lines over IP networks.
+
+Additionally it can be used to add complex logic via applications that are not
+directly interfaced with KNX.
+
 ## Protocol
 
 ### Header
@@ -52,3 +58,14 @@ Known identifier:
 The total length describes the length of the whole UDP datagram (incl. header).
 
 > payload length = total length - header length
+
+## Tunnel Protocol
+
+While using a direct connection to a KNXnet/IP device one has to handle connection pools
+as well as different channels assigned by the IP router.
+
+Tunnel protocol seems quiet similar to the default protocol except that all messages contain
+a channel id that needs to be requested for different purposes.
+
+    | header  | channel | payload |
+    | x bytes | 1 byte  | x byte  |
