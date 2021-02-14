@@ -22,8 +22,13 @@ You can find further information on [elinux](https://elinux.org/Pollux) like [da
 > If "Bootloader was updated" message appears repeat boot procedure.
 > The message "Firmware Upgrade Complete" turns up as soon as upgrade is complete.
 
+## Bootloader
+
+The source for the u-boot bootbloader `1.1.6` is available at [openhandhelds.org](https://dl.openhandhelds.org/cgi-bin/caanoo.cgi?0,0,0,0,42,539).
+A git repo containing also the u-boot history until `1.1.6` is available on [github](https://github.com/esno/u-boot-gp2x-caanoo).
+
 ## Kernel
 
-The kernel source for kernel 2.6.24 is available at [openhandhelds.org](https://dl.openhandhelds.org/cgi-bin/caanoo.cgi?0,0,0,0,42)
+The source for kernel `2.6.24` is available at [openhandhelds.org](https://dl.openhandhelds.org/cgi-bin/caanoo.cgi?0,0,0,0,42)
 but at least for me I had some weird character issues therefore I cleaned up the source and applied
 all changes to the upstream linux-stable repository on [github](https://github.com/esno/linux-gp2x-caanoo).
