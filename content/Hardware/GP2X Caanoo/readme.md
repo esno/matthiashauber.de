@@ -23,6 +23,8 @@ The u-boot bootloader will probe files in the following order when you press `R`
 4. update.gz
 
 If one does not exists it will be skipped. The `update.gz` will only be loaded when a `uImageUP` was loaded successfully.
+See [u-boot 1.1.6](https://github.com/esno/u-boot-gp2x-caanoo/blob/a60b01e90c6dcf6fd7db323ad014c00d15e70649/common/main.c#L673-L779)
+for details.
 
 ## Bootloader
 
