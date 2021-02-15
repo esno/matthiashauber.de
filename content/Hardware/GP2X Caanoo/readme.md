@@ -14,13 +14,15 @@ You can find further information on [elinux](https://elinux.org/Pollux) like [da
 
 ## Update Procedure
 
-* Copy extracted firmware to the root folder of a SD card.
-* Insert SD card
-* Boot while press `R`
-* Release `R` when "Firmware upgrading..." message appears
+Prepare a sdcard with a msdos partition layout. The first partition can be either fat16 or fat32 formatted.
+The u-boot bootloader will probe files in the following order when you press `R` while booting the device.
 
-> If "Bootloader was updated" message appears repeat boot procedure.
-> The message "Firmware Upgrade Complete" turns up as soon as upgrade is complete.
+1) polluxb-n35
+2) uImage-n35
+3) uImageUP
+4) update.gz
+
+If one does not exists it will be skipped. The `update.gz` will only be loaded when a `uImageUP` was loaded successfully.
 
 ## Bootloader
 
