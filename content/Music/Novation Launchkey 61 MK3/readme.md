@@ -36,4 +36,4 @@ Press the Scene Launch button `>` (top-right pad) to display the bootloader vers
 
 ### Start / Boot
 
-Press Device Select, Device Lock or the Play button to start the application.
+Press `Device Select`, `Device Lock` or the `Play` button to start the application.
