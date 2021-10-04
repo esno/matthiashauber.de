@@ -1,9 +1,10 @@
 return {
   -- generic website options
   title       = "matthiashauber",
-	description = "open-source tech stuff",
+  description = "open-source tech stuff",
   website     = "https://matthiashauber.de",
   cname       = "matthiashauber.de",
+  head        = "../.head.html",
 
   -- add "index.html" to the end of each link
   pagesuffix  = nil,
