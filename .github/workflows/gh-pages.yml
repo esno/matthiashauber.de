@@ -1,0 +1,35 @@
+name: gh-pages
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ghtoken }}
+      - name: prepare
+        run: |
+          sudo apt-get install lua5.2 lua5.2-filesystem -y
+      - name: build
+        run: |
+          git clone --recursive https://github.com/esno/webls.git -b customhead .webls
+          cp -f .webls-config.lua .webls/config.lua || true
+          rm -r .webls/content
+          cp -r content .webls/content
+          ( cd .webls && ./webls.lua )
+      - name: deploy
+        run: |
+          git checkout --orphan gh-pages
+          rm -r *
+          mv .webls/www/* .
+          rm -r .webls .github .gitignore .gitmodules .head.html .webls-config.lua
+          git config user.name "Github Actions"
+          git config user.email "noreply@matthiashauber.de"
+          git add -A
+          git commit -m "deploy github pages"
+          git push origin gh-pages -f
