@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.ghtoken }}
+          submodules: true
       - name: prepare
         run: |
           sudo apt-get install lua5.2 lua5.2-filesystem -y
