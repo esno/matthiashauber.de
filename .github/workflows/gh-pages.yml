@@ -23,6 +23,7 @@ jobs:
           rm -r .webls/content
           cp -r content .webls/content
           ( cd .webls && ./webls.lua )
+          cp .webls/content/ads.txt .webls/www
       - name: deploy
         run: |
           git checkout --orphan gh-pages
