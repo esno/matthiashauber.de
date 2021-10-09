@@ -23,13 +23,12 @@ jobs:
           rm -r .webls/content
           cp -r content .webls/content
           ( cd .webls && ./webls.lua )
-          cp .webls/content/ads.txt .webls/www
       - name: deploy
         run: |
           git checkout --orphan gh-pages
           rm -r *
           mv .webls/www/* .
-          rm -r .webls .github .gitignore .gitmodules .head.html .webls-config.lua
+          rm -r .webls .github .gitignore .gitmodules .webls-config.lua
           git config user.name "Github Actions"
           git config user.email "noreply@matthiashauber.de"
           git add -A
