@@ -4,7 +4,7 @@ return {
   description = "open-source tech stuff",
   website     = "https://matthiashauber.de",
   cname       = "matthiashauber.de",
-  head        = nil,
+  head        = "../.head.html",
 
   -- add "index.html" to the end of each link
   pagesuffix  = nil,
@@ -22,6 +22,7 @@ return {
   markdown = {
     extensions = { ".md" }
   },
+
   gallery = {
     extensions = { ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg" }
   },
