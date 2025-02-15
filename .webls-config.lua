@@ -27,6 +27,10 @@ return {
     extensions = { ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg" }
   },
 
+  download = {
+    extensions = { ".pdf", ".gz", ".bz2", ".xz", ".zip", ".rar" }
+  },
+
   -- define default colors
   colors      = {
     ["accent"]      = "#7bb794",
