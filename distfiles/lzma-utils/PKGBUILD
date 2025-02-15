@@ -1,0 +1,23 @@
+pkgname=lzma-utils
+pkgver=4.32.7
+pkgrel=1
+pkgdesc='LZMA Utils are legacy data compression software with high compression ratio.'
+arch=('x86_64')
+url='https://tukaani.org/lzma/'
+license=('GPLv2+', 'LGPLv2.1+', 'GPLv3+')
+provides=('lzma-utils')
+source=('https://tukaani.org/lzma/lzma-4.32.7.tar.bz2')
+md5sums=('4828bc9e409cf1f084bc9f2799c49f3d')
+
+build() {
+  cd "$srcdir/lzma-4.32.7"
+  ./configure
+  make
+}
+
+package() {
+  cd "$srcdir/lzma-4.32.7"
+  make DESTDIR="$pkgdir/" prefix="/opt/lzma-utils" install
+  install -d "$pkgdir/usr/lib"
+  install "$pkgdir/opt/lzma-utils/lib/liblzmadec.so.0.0.0" "$pkgdir/usr/lib/liblzmadec.so"
+}
