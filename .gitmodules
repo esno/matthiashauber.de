@@ -10,6 +10,3 @@
 [submodule "content/Software/lua-lsw"]
 	path = content/Software/lua-lsw
 	url = https://github.com/esno/lua-lsw.git
-[submodule "content/Hardware/DNA 75"]
-	path = content/Hardware/DNA 75
-	url = https://github.com/esno/helix.git
