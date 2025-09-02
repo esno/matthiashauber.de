@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Music</a> » <span>Novation Launchkey 61 MK3</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>Novation Launchkey 61 MK3</h1>
+
+<p>THe launchkey has a MIDI interface as well as an USB interface providing MIDI.</p>
+
+<pre><code>$ dmesg
+[172766.911294] usb 1-3: new full-speed USB device number 5 using xhci_hcd
+[172767.250921] usb 1-3: New USB device found, idVendor=1235, idProduct=0137, bcdDevice= 2.00
+[172767.250929] usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[172767.250932] usb 1-3: Product: Launchkey MK3 61
+[172767.250934] usb 1-3: Manufacturer: Focusrite - Novation
+[172767.250936] usb 1-3: SerialNumber: ****************
+
+[172767.291001] usb-storage 1-3:1.2: USB Mass Storage device detected
+[172767.291164] scsi host9: usb-storage 1-3:1.2
+[172768.294500] scsi 9:0:0:0: Direct-Access     Novation Onboarding Drive 0.01 PQ: 0 ANSI: 2
+[172768.294776] sd 9:0:0:0: Attached scsi generic sg4 type 0
+[172768.295994] sd 9:0:0:0: [sdd] 384 512-byte logical blocks: (197 kB/192 KiB)
+[172768.296458] sd 9:0:0:0: [sdd] Write Protect is on
+[172768.296462] sd 9:0:0:0: [sdd] Mode Sense: 03 00 80 00
+[172768.297049] sd 9:0:0:0: [sdd] No Caching mode page found
+[172768.297052] sd 9:0:0:0: [sdd] Assuming drive cache: write through
+[172768.341075]  sdd: sdd1
+[172768.344471] sd 9:0:0:0: [sdd] Attached SCSI removable disk
+</code></pre>
+
+<h2>Bootloader</h2>
+
+<p>The bootloader mode allows us to configure and save certain settings.
+You can access the bootload by holding <code>Octave Up</code> and <code>Octave Down</code> while plugging the device in.</p>
+
+<p>As long as the <em>Easy Start</em> is enabled the Launchkey MK3 shows up as a Mass Storage device and provides
+a <em>Getting Started</em> guide. This behavior can be disabled in bootloader via pressing <code>Fixed Chord</code> button.</p>
+
+<h3>Bootloader version</h3>
+
+<p>Press the Scene Launch button <code>&gt;</code> (top-right pad) to display the bootloader version.</p>
+
+<h3>Start / Boot</h3>
+
+<p>Press <code>Device Select</code>, <code>Device Lock</code> or the <code>Play</code> button to start the application.</p>
+
+</div><div class="gallery"><a href="launchkey-61-mk3.jpg"><img src="launchkey-61-mk3.jpg"/><span>launchkey-61-mk3</span></a></div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

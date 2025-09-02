@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Hardware</a> » <a href="../">KNX</a> » <span>Siemens KNX-IP Router</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>Siemens KNX-IP Router</h1>
+
+<p>The Siemens KNX-IP Router (<code>5WG1 146-1AB02</code>) is a
+bridge to KNX networks.</p>
+
+<p>Right now there are two known methods available to
+communicate to the IP Router. Either sending UDP messages
+via a preconfigured multicast address or sending UDP
+directly to a single IP router.</p>
+
+<p>The first requires an endpoint that supports multicast
+the latter requires only UDP support.</p>
+
+<p>If you decide for any reason not to use multicast remember
+that your application has to handle more complex messages
+and "establish" a connection via a handshake instead of
+just sending telegrams.</p>
+
+<p>The IP router will translate and forward directly received
+messages via multicast to other devices that are available
+within your multicast domain. Therefore you don't have to care
+much about how to send messages to all members in your network.</p>
+
+<h2>Trivia</h2>
+
+<p>The IP router has to be configured to a multicast IP address (e.g. <code>224.0.23.12</code>)
+and a static IP or DHCP assigned.</p>
+
+<p>The default port for the KNXnet/IP protocol is <code>3671/udp</code>.</p>
+
+<h2>Multicast vs direct connection</h2>
+
+<p>Since we want to know what's send on the wire I used a Linux machine with two
+network interfaces, linked into a network bridge and connected between the
+IP Router and the rest of the devices in the network.</p>
+
+<pre><code>$ brctl addbr knx0
+$ brctl addif knx0 enp3s0f3u1u2u3
+$ brctl addif knx0 enp3s0f3u1u2u1
+$ brctl show
+bridge name   bridge id             STP enabled     interfaces
+knx0          8000.a69caebd4e66     no              enp3s0f3u1u2u1
+                                                    enp3s0f3u1u2u3
+
+$ ip a add 192.168.9.250/24 dev knx0
+$ ip r add to 224.0.23.12 dev knx0
+</code></pre>
+
+<p>This setup provides the ability to capture the whole network traffic
+between the IP Router and other network devices.</p>
+
+<p>While watching into the protocol I had access to a Siemens S7-1200
+which does not support multicast.</p>
+
+<p>The IP router did neither respond nor react to telegrams sent
+to the device IP directly. To see if the IP Router responds only to
+multicast requests I wrote a stupid proxy to translate those udp datagrams into
+multicast messages</p>
+
+<pre><code>#!/usr/bin/python
+
+import socket
+
+UDP_ADDR = '192.168.9.250'
+MCAST_GRP = '224.0.23.12'
+MCAST_PORT = 3671
+
+mcast = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+mcast.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+mcast.bind((MCAST_GRP, MCAST_PORT))
+
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+udp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+udp.bind((UDP_ADDR, MCAST_PORT))
+
+while (True):
+  buffer = udp.recvfrom(1024)
+  size = mcast.sendto(buffer[0], (MCAST_GRP, MCAST_PORT))
+  print("sent: %d" % (size))
+</code></pre>
+
+<p>This test proved that our first telegram was properly and the IP router seems to only
+respond on multicast.</p>
+
+<p>But there's more. The router accepts directly addressed datagrams as well if you deal
+properly with the "tunnel interface".
+In case you have to use a direct connection to a KNX-IP router your software stack
+has to request a tunnel/channel where telegrams can be send and forwwarded/tunneled
+by the router within the multicast domain.</p>
+
+<p>Such channel will be assigned on a tunnel request to the IP router and announced in
+it's response. There may multiple channels to be handled since a connection request
+will use a different channel than a configuration request.</p>
+
+<p>Long story short: Multicast requests are much simpler than connecting directly to an
+IP router because direct connections require more logic in your application stack.</p>
+
+</div><div class="gallery"><a href="Siemens IP Router.png"><img src="Siemens IP Router.png"/><span>Siemens IP Router</span></a></div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

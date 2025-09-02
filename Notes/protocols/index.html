@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Notes</a> » <span>protocols</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a><a class="sidelink" href="ipxe/">ipxe</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="http.md" class="text">
+<h1>general</h1>
+
+<p>connect to a http server by using <code>telnet</code> or <code>openssl s_client</code> (in case of tls-only server)</p>
+
+<h2>examples</h2>
+
+<pre><code># plaintext
+telnet example.org 80
+
+# on embedded systems
+busybox telnet example.org 80
+
+# tls
+openssl s_client -connect example.org:443
+</code></pre>
+
+<h1>methods</h1>
+
+<h2>get</h2>
+
+<pre><code>GET / HTTP/1.1
+host: example.org
+
+HTTP/1.1 200 OK
+Cache-Control: max-age=604800
+Content-Type: text/html
+Date: Tue, 11 Jul 2017 14:31:52 GMT
+Etag: "*********+ident"
+Expires: Tue, 18 Jul 2017 14:31:52 GMT
+Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+Server: ECS (iad/182A)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1270
+
+[...]
+</code></pre>
+
+</div><div id="lldp.md" class="text">
+<h1>link layer discovery protocol</h1>
+
+<pre><code>tcpdump -nnvi eth0 -s 1500 -XX -c 1 'ether proto 0x88cc'
+</code></pre>
+
+<h1>cisco discovery protocol</h1>
+
+<pre><code>tcpdump -nnvi eth0 -s 1500 -c 1 'ether[20:2] == 0x2000'
+</code></pre>
+
+<h1>scanning lldp and cdp</h1>
+
+<pre><code>tcpdump -nnvi eth0 -s 1500 -c 1 '(ether[20:2] = 0x2000 or ether[12:2] = 0x88cc)'
+</code></pre>
+
+</div><div id="whois.md" class="text">
+<h1>general</h1>
+
+<p>connect to a whois server by using <code>telnet</code>.
+Response of whois requests is <em>not</em> standardized!</p>
+
+<h2>examples</h2>
+
+<pre><code># telnet whois.denic.de 43
+Trying 81.91.170.6...
+Connected to whois.denic.de.
+Escape character is '^]'.
+-T dn denic.de
+% Copyright (c) 2010 by DENIC
+% Version: 2.0
+% 
+% Restricted rights.
+% 
+% Terms and Conditions of Use
+% 
+% The data in this record is provided by DENIC for informational purposes only.
+% DENIC does not guarantee its accuracy and cannot, under any circumstances,
+% be held liable in case the stored information would prove to be wrong,
+% incomplete or not accurate in any sense.
+% 
+% All the domain data that is visible in the whois service is protected by law.
+% It is not permitted to use it for any purpose other than technical or
+% administrative requirements associated with the operation of the Internet.
+% It is explicitly forbidden to extract, copy and/or use or re-utilise in any
+% form and by any means (electronically or not) the whole or a quantitatively
+% or qualitatively substantial part of the contents of the whois database
+% without prior and explicit written permission by DENIC.
+% It is prohibited, in particular, to use it for transmission of unsolicited
+% and/or commercial and/or advertising by phone, fax, e-mail or for any similar
+% purposes.
+% 
+% By maintaining the connection you assure that you have a legitimate interest
+% in the data and that you will only use it for the stated purposes. You are
+% aware that DENIC maintains the right to initiate legal proceedings against
+% you in the event of any breach of this assurance and to bar you from using
+% its whois service.
+% 
+% The DENIC whois service on port 43 never discloses any information concerning
+% the domain holder/administrative contact. Information concerning the domain
+% holder/administrative contact can be obtained through use of our web-based
+% whois service available at the DENIC website:
+% http://www.denic.de/en/domains/whois-service/web-whois.html
+% 
+
+Domain: denic.de
+Nserver: ns1.denic.de 2001:668:1f:11:0:0:0:106 77.67.63.106
+Nserver: ns2.denic.de 78.104.145.26
+Nserver: ns3.denic.de 81.91.173.19
+Dnskey: 257 3 8 AwEAAb/xrM2MD+xm84YNYby6TxkMaC6PtzF2bB9WBB7ux7iqzhViob4GKvQ6L7CkXjyAxfKbTzrdvXoAPpsAPW4pkThReDAVp3QxvUKrkBM8/uWRF3wpaUoPsAHm1dbcL9aiW3lqlLMZjDEwDfU6lxLcPg9d14fq4dc44FvPx6aYcymkgJoYvR6P1wECpxqlEAR2K1cvMtqCqvVESBQV/EUtWiALNuwR2PbhwtBWJd+e8BdFI7OLkit4uYYux6Yu35uyGQ==
+Status: connect
+Changed: 2017-07-17T17:04:03+02:00
+
+[Tech-C]
+...
+
+[Zone-C]
+...
+Connection closed by foreign host.
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

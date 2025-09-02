@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Games</a> » <a href="../">Valve</a> » <span>SteamCMD</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>SteamCMD</h1>
+
+<p>The SteamCMD is a command-line version of the Steam client.
+It's primary used to install and update various dedicated servers that are available on Steam.</p>
+
+<h2>install the SteamCMD</h2>
+
+<p>This guide depends on debian/ubuntu servers, for other distros it should be similar but package names may differ.
+Install prerequirements:</p>
+
+<pre><code>apt-get update
+apt-get install wget lib32gcc1 libc6-i386
+</code></pre>
+
+<p>Create a new user which will run the server processes</p>
+
+<pre><code>useradd -d /opt/steam -m -s /bin/bash -u 99 -U steam
+</code></pre>
+
+<p>Fetch the <code>SteamCMD</code> runtime for linux</p>
+
+<pre><code>su -l steam
+mkdir /opt/steam/steamcmd &amp;&amp; cd /opt/steam/steamcmd
+wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
+tar xzf steamcmd_linux.tar.gz
+exit
+
+ln -s /opt/steamcmd/steam.sh /usr/local/bin/
+ln -s /opt/steamcmd/steamcmd.sh /usr/local/bin/
+ln -s /opt/steamcmd/linux32 /usr/local/bin
+</code></pre>
+
+<p>To install a dedicated server you need to find the right Steam app id of the dedicated server.
+Here's a list of well-known games</p>
+
+<pre><code>| Name                   | Game    | Engine | AppId  |
+| ---------------------- | ------- | ------ | ------ |
+| Counter-Strike 1.6     | cstrike | hlds   |     90 |
+| Counter-Strike: Source | cstrike | srcds  | 232330 |
+| Day of Defeat: Source  | dod     | srcds  | 232290 |
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

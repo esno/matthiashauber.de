@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Notes</a> » <a href="../">linux</a> » <span>kernel</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="kernel.md" class="text">
+<h1>Kernel</h1>
+
+<h2>Useful tools</h2>
+
+<ul>
+    <li><a href="http://elixir.free-electrons.com/linux/latest/source">elixir</a></li>
+</ul>
+
+<h2>Writing modules</h2>
+
+<p>preparing kernel source:</p>
+
+<pre><code>git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+git checkout &lt;version&gt;
+git checkout -b &lt;your-branch&gt;
+</code></pre>
+
+<p>preparing menuconfig:</p>
+
+<pre><code># e.g. drivers/hid/Kconfig
+
+config YOUR_STRING
+tristate "Summary text"
+depends on SOME_OTHER_MODULES
+default n|y|m
+---help---
+your additional info
+in multiple lines
+</code></pre>
+
+<p>preparing Makefile:</p>
+
+<pre><code># e.g. drivers/hid/Makeconfig
+
+obj-$(CONFIG_YOUR_STRING)       += your-cfile.o
+</code></pre>
+
+<h2>Beating the kernel</h2>
+
+<h3>Magic sysrq's</h3>
+
+<p>Press <code>Alt</code>+<code>SysRq</code></p>
+
+<blockquote>
+    <p><code>SysRq</code> is often located at <code>Print</code></p>
+</blockquote>
+
+<ul>
+    <li><code>space</code> = print summary of available SysRq keys</li>
+    <li><code>m</code> = print the current memory information to the console</li>
+</ul>
+
+<h3>Unbind/Bind hardware to/from modules</h3>
+
+<pre><code>echo -n "xxxx:yyyy:zzzz.aaaa" &gt; /sys/bus/hid/drivers/generic-usb/unbind
+echo -n "xxxx:yyyy:zzzz.aaaa" &gt; /sys/bus/hid/drivers/hid-foo/bind
+</code></pre>
+
+<h3>Coredumps</h3>
+
+<pre><code>cat /proc/sys/kernel/core_pattern
+|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %e
+</code></pre>
+
+<p>command/location to store coredump files</p>
+
+<h3>Suspend to ram</h3>
+
+<pre><code>echo mem &gt; /sys/power/state
+</code></pre>
+
+<h3>Networking</h3>
+
+<p>Dealing with the limits of too much concurrent connections.</p>
+
+<h4>Outgoing</h4>
+
+<pre><code># gather port range for local/dynamic sockets.
+sysctl net.ipv4.ip_local_port_range
+# gather tcp connection timeout. socket is in TIME_WAIT.
+sysctl net.ipv4.tcp_fin_timeout
+
+ip_local_port_range / tcp_fin_timeout = sockets_per_second
+</code></pre>
+
+<h4>Incoming</h4>
+
+<pre><code># gather the maximum number of requests queued to a listen socket.
+sysctl net.core.somaxconn
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

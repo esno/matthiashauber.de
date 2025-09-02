@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Hardware</a> » <a href="../">Lenovo Yoga Slim 7</a> » <span>BIOS unlock</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="README.md" class="text">
+<h1>yoga-bios-unlock</h1>
+
+<p>Based on FlyGoat's work to unlock the BIOS advanced menu documented <a href="https://zhuanlan.zhihu.com/p/184982689">here</a>,
+I wrote that tool to unlock my yoga laptop without using a proprietary software which is only available on Windows.</p>
+
+<p>I'd like to thank FlyGoat a lot for giving me the right direction on how to translate his guide into low-level functions
+provided by glibc (see also <a href="https://gist.github.com/FlyGoat/5f0dba5b5ccc1b6ab73023489e1e989a">FlyGoats gist</a>).</p>
+
+<p>This tool will unlock the advanced menu in your Lenovo Yoga Slim 7 14ARE05.</p>
+
+<p>To unlock the advanced menu it's necessary to change the data field on port <code>0x73</code> at index <code>0xf7</code>.
+Port <code>0x72</code> is the index port that defines which value at <code>0x73</code> will be accessed.</p>
+
+<pre><code>                            \/
+     | 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+  ---+------------------------------------------------
+  00 | 21 bc 21 63 00 00 5a a5 18 70 f6 7c 00 f5 19 00
+  10 | 80 00 a6 20 00 44 00 02 00 00 94 80 89 00 e0 49
+  20 | 00 0d 04 30 21 00 24 00 00 10 00 04 00 00 04 ec
+  30 | 55 55 55 55 ff 07 00 20 29 00 8c 00 0a a8 00 08
+  40 | f4 00 00 00 01 20 01 01 08 00 00 00 10 11 00 00
+  50 | 00 00 80 00 00 00 41 00 00 00 00 00 ff 07 00 00
+  60 | 00 00 00 00 00 10 00 20 02 00 00 00 00 00 00 00
+  70 | 00 00 00 00 08 01 08 00 00 00 00 00 86 22 00 00
+  80 | c0 0c 00 80 09 52 00 00 00 00 00 00 00 00 00 00
+  90 | 00 00 00 00 08 00 00 80 00 00 04 40 00 80 00 00
+  a0 | 00 00 00 00 00 00 00 00 20 40 00 00 20 00 01 00
+  b0 | 00 00 08 20 00 00 40 00 00 00 00 00 00 42 00 00
+  c0 | 02 02 00 00 00 40 00 00 00 00 80 80 00 00 00 40
+  d0 | 00 40 14 00 02 00 82 00 00 00 00 80 81 08 00 80
+  e0 | 00 02 00 01 00 00 00 00 00 00 00 00 00 00 01 00
+&gt; f0 | 29 a4 a7 a7 00 00 00 77 e0 00 24 04 00 10 10 00
+                            /\
+</code></pre>
+
+<h2>Compatibility</h2>
+
+<pre><code>| Version  | Missing features    |
+| -------- | ------------------- |
+| DMCN27WW |                     |
+| DMCN29WW |                     |
+| DMCN32WW |                     |
+| DMCN34WW | no XFR enhancements |
+| DMCN35WW | no XFR enhancements |
+| DMCN36WW | no XFR enhancements |
+| DMCN38WW | no XFR enhancements |
+</code></pre>
+
+<p>If you're aware of any further differences in BIOS version please raise a <a href="https://github.com/esno/yoga-bios-unlock/issues/new">ticket</a>
+or open a pull request.</p>
+
+<h3>BIOS downgrade</h3>
+
+<p>Boot into BIOS and go to <code>Configuration</code> tab.
+There is an option called <code>BIOS Back Flash</code> which is disabled by default.</p>
+
+<p>The product page of <a href="https://pcsupport.lenovo.com/de/de/products/laptops-and-netbooks/ideapad-s-series-netbooks/slim-7-14are05/downloads/driver-list/component?name=BIOS">lenovo's Yoga Slim 7</a>
+provides the latest BIOS version. Thanks to lenovo they do not obfuscate their download links therefore
+it's quiet easy to estimate former versions and download them.</p>
+
+<p>Former BIOS versions are available at lenovo servers:</p>
+
+<ul>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn27ww.exe">DMCN27WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn29ww.exe">DMCN29WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn32ww.exe">DMCN32WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn34ww.exe">DMCN34WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn35ww.exe">DMCN35WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn36ww.exe">DMCN36WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn38ww.exe">DMCN38WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn39ww.exe">DMCN39WW</a></li>
+</ul>
+
+<p>Readme and installation instructions are also available:</p>
+
+<ul>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn27ww.txt">DMCN27WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn29ww.txt">DMCN29WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn32ww.txt">DMCN32WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn34ww.txt">DMCN34WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn35ww.txt">DMCN35WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn36ww.txt">DMCN36WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn38ww.txt">DMCN38WW</a></li>
+    <li><a href="https://download.lenovo.com/consumer/mobiles/dmcn39ww.txt">DMCN39WW</a></li>
+</ul>
+
+<h2>Disclaimer</h2>
+
+<p>This tool may eat your cat, burn your house or do anything else beside the expected task.
+So use it at your own risk and be aware that you're playing around with your BIOS which may end in a bricked device.</p>
+
+<h2>Known Issues</h2>
+
+<p>If you hit the following issue please disable secure boot first and try again:</p>
+
+<pre><code>Can't set I/O privilege level (Operation not permitted)
+</code></pre>
+
+<h2>Usage</h2>
+
+<blockquote>
+    <p>BIOS versions greater or equal to <code>DMCN34WW</code> are supported but hiding some menus.
+    Using <code>DMCN32WW</code> is recommended.</p>
+</blockquote>
+
+<h3>Build from source</h3>
+
+<pre><code>git clone https://github.com/esno/yoga-bios-unlock.git
+cd ./yoga-bios-unlock
+make
+</code></pre>
+
+<h3>Verify current value of data port</h3>
+
+<pre><code># ./yoga-bios-unlock --read
+Run in read mode
+Be aware that readmode temporarily changes value of port 0x72 to index 0xf7
+WARNING: use at your own risk!
+Agree? (y/n) y
+Port 0x72 is 0xf4 and will be set to 0xf7
+Port 0x73 is 0x00 and would be set to 0x77
+</code></pre>
+
+<h3>Unlock your BIOS</h3>
+
+<pre><code># ./yoga-bios-unlock --unlock
+Run in unlock mode
+WARNING: use at your own risk!
+Agree? (y/n) y
+Port 0x72 is 0xf4 and will be set to 0xf7
+</code></pre>
+
+<h3>Lock your BIOS</h3>
+
+<pre><code># ./yoga-bios-unlock --lock
+Run in lock mode
+WARNING: use at your own risk!
+Agree? (y/n) y
+Port 0x72 is 0xf4 and will be set to 0xf7
+</code></pre>
+
+<h3>Ignore platform check results</h3>
+
+<p>If you know that you're on Lenovo Yoga Slim 7 (14ARE05) but either board version migh differ
+or BIOS version is currently not supported by this tool you can enforce a unlock.
+If you do please open a ticket/PR to notify me that your current BIOS version/board version works well.</p>
+
+<h4>Enforce unlock your BIOS</h4>
+
+<pre><code># ./yoga-bios-unlock --unlock --force
+Run in unlock mode
+Platform checks are disabled - hopefully you know what you do
+WARNING: use at your own risk!
+Agree? (y/n) y
+Port 0x72 is 0xf4 and will be set to 0xf7
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

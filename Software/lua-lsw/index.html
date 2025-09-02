@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Software</a> » <span>lua-lsw</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="README.md" class="text">
+<h1>lua-lsw</h1>
+
+<p>a lua based client for <a href="http://developer.leaseweb.com/">leaseweb api</a></p>
+
+<h2>binding</h2>
+
+<h3>install</h3>
+
+<pre><code>% &gt; luarocks install lua-lsw
+</code></pre>
+
+<h3>usage</h3>
+
+<pre><code>% &gt; lua
+Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Rio
+&gt;
+&gt; lswMetals = require('leaseweb.bareMetals')
+&gt; metals = lswMetals:init('&lt;api-key&gt;').listServers()
+&gt;
+&gt; for k, v in pairs(metals[1]) do if type(v) == 'function' then print(k) end end
+retrieveSwitchPortStatus
+retrieveBareMetal
+closeSwitchPort
+updateIp
+retrieveLease
+retrieveBandwidthUsage
+deleteLeases
+retrievePowerStatus
+retrieveDataTrafficUsage
+listIps
+updateBareMetal
+listLeases
+retrieveIp
+openSwitchPort
+reboot
+deleteLease
+retrieveInstallationStatus
+retrieveNetworkUsage
+createLease
+retrievePassword
+</code></pre>
+
+<h2>cli</h2>
+
+<h3>install</h3>
+
+<pre><code>% &gt; luarocks install lua-lswcli
+</code></pre>
+
+<h3>usage</h3>
+
+<h4>authentication</h4>
+
+<p>lsw cli is asking for the api key if config file doesn't exists.
+As soon as you entered the api key it will persisted in <code>~/.config/lsw/rc.lua</code></p>
+
+<pre><code>welcome to leaseweb api client. help for help
+token &gt; 689990ad-ca3f-4d35-b299-0c493a86e985
+&gt; :q
+</code></pre>
+
+<h4>common</h4>
+
+<pre><code>% &gt; lsw
+welcome to leaseweb api client. help for help
+&gt; help
+the following commands are available
+    bareMetal               manage your bare metal servers
+&gt; bareMetal
+bareMetal &gt; help
+the following commands are available
+    info            prints detailed information about the selected server
+    ls              shows all bareMetal servers
+    ref             update server reference
+    select          select a server
+    status          prints information about server status
+bareMetal &gt; ls
+123456  ROFL001/Bare Metal      rofl1.example.org
+234567  ROFL002/Bare Metal      rofl2.example.org
+bareMetal &gt; status
+no server selected
+bareMetal &gt; select
+1) ROFL001 / rofl1.example.org
+2) ROFL002 / rofl2.example.org
+select &gt; 1
+bareMetal [ROFL001] &gt; status
+power:  on              switch: open
+
+a.b.c.d:                routed
+b.c.d.e:                routed
+c.d.e.f:                routed
+::1:                    routed
+bareMetal [ROFL001] &gt; select 
+1) ROFL001 / rofl1.example.org
+2) ROFL002 / rofl2.example.org
+select &gt; 2
+bareMetal [ROFL002] &gt; status
+power:  on              switch: open
+
+d.e.f.g:                routed
+e.f.g.h:                routed
+bareMetal [ROFL002] &gt; exit
+&gt; exit
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Notes</a> » <span>VR</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="lovr.md" class="text">
+<h1>lövr - virtual reality for lua</h1>
+
+<p><a href="https://github.com/bjornbytes/lovr">lövr</a> is based on the löve lua 2d game engine.</p>
+
+<h2>hello world</h2>
+
+<pre><code>function lovr.draw()
+  lovr.graphics.print('Hello World!', 0, 1.7, -3, .5)
+end
+</code></pre>
+
+<p>the VR application has to be named 'main.lua'</p>
+
+<pre><code>$ ./lovr ${LOVR_PROJECT_PATH}
+</code></pre>
+
+<h2>webvr</h2>
+
+<h3>prepare emsdk</h3>
+
+<pre><code># install the emsdk modified for lovr
+$ wget https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz
+$ tar -xf emsdk-portable.tar.gz
+$ ./emsdk update
+$ ./emsdk install latest
+$ ./emsdk activate latest
+
+# clone customized emscripten
+$ git clone https://github.com/bjornbytes/emscripten.git -b lovr
+</code></pre>
+
+<h3>build lovr-webvr</h3>
+
+<pre><code>$ git clone https://github.com/bjornbytes/lovr.git
+$ cd lovr &amp;&amp; mkdir build &amp;&amp; cd build
+$ ${EMSCRIPTEN_PATH}/emcmake cmake ..
+$ python ${EMSCRIPTEN_PATH}/embuilder.py build binaryen
+$ ${EMSCRIPTEN_PATH}/emmake make -j2
+</code></pre>
+
+<h3>generate webvr application</h3>
+
+<pre><code>$ python &lt;/path/to&gt;/emscripten/tools/file_packager.py \
+    game.data \
+    --no-heap-copy \
+    --preload \
+    &lt;/path/to/lovr/project&gt; \
+    --js-output=game.js
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

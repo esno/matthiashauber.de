@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../">welcome!</a> » <span>Notes</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a><a class="sidelink" href="VR/">VR</a><a class="sidelink" href="databases/">databases</a><a class="sidelink" href="git/">git</a><a class="sidelink" href="linux/">linux</a><a class="sidelink" href="pentesting/">pentesting</a><a class="sidelink" href="protocols/">protocols</a><a class="sidelink" href="trash/">trash</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="bluray.md" class="text">
+<h1>bluray ripping</h1>
+
+<p>blurays are usually DRM protected. to access your property you need <code>libbluray</code> and <code>libaacs</code>.
+libaacs requires a valid <code>~/.config/aacs/KEYDB.cfg</code> which is not part of the library.</p>
+
+<pre><code>wget http://fvonline-db.bplaced.net/fv_download.php?lang=eng -O keydb.zip
+</code></pre>
+
+<h2>probe bluray</h2>
+
+<pre><code>$ ffprobe bluray:/dev/sr0
+[bluray @ 0x59e1edc75e00] 7 usable playlists:
+[bluray @ 0x59e1edc75e00] playlist 00031.mpls (0:45:33)
+[bluray @ 0x59e1edc75e00] playlist 00027.mpls (3:47:40)
+[bluray @ 0x59e1edc75e00] playlist 00044.mpls (0:45:32)
+[bluray @ 0x59e1edc75e00] playlist 00042.mpls (0:45:32)
+[bluray @ 0x59e1edc75e00] playlist 00041.mpls (0:45:33)
+[bluray @ 0x59e1edc75e00] playlist 00040.mpls (0:45:32)
+[bluray @ 0x59e1edc75e00] playlist 00094.mpls (0:05:00)
+[bluray @ 0x59e1edc75e00] selected 00027.mpls
+
+Input #0, mpegts, from 'bluray:/dev/sr0':
+  Duration: 25:30:45.72, start: 4199.000000, bitrate: 3802 kb/s
+  Program 1 
+  Stream #0:0[0x1011]: Video: h264 (High) (HDMV / 0x564D4448), yuv420p(progressive), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 90k tbn
+  Stream #0:1[0x1100]: Audio: dts (dca) (DTS-HD MA) ([134][0][0][0] / 0x0086), 48000 Hz, 7.1, s32p (24 bit)
+  Stream #0:2[0x1101]: Audio: ac3 (AC-3 / 0x332D4341), 48000 Hz, stereo, fltp, 192 kb/s
+  Stream #0:3[0x1102]: Audio: ac3 (AC-3 / 0x332D4341), 48000 Hz, stereo, fltp, 192 kb/s
+  Stream #0:4[0x1103]: Audio: ac3 (AC-3 / 0x332D4341), 48000 Hz, stereo, fltp, 192 kb/s
+  Stream #0:5[0x1104]: Audio: ac3 (AC-3 / 0x332D4341), 48000 Hz, stereo, fltp, 192 kb/s
+  Stream #0:6[0x1105]: Audio: ac3 (AC-3 / 0x332D4341), 48000 Hz, stereo, fltp, 192 kb/s
+  Stream #0:7[0x1106]: Audio: ac3 (AC-3 / 0x332D4341), 48000 Hz, stereo, fltp, 192 kb/s
+  Stream #0:8[0x1200]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:9[0x1201]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:10[0x1202]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:11[0x1203]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:12[0x1204]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:13[0x1205]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:14[0x1206]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:15[0x1207]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:16[0x1208]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:17[0x1209]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+  Stream #0:18[0x120a]: Subtitle: hdmv_pgs_subtitle (pgssub) ([144][0][0][0] / 0x0090), 1920x1080
+</code></pre>
+
+<h2>watch bluray playlist</h2>
+
+<pre><code>ffplay -playlist 31 bluray:/dev/sr0
+</code></pre>
+
+<h2>extract (libbluray style)</h2>
+
+<pre><code>$ bd_list_titles /dev/sr0 
+Main title: 2
+index:   1 duration: 00:45:33 chapters:   8 angles:  1 clips:   2 (playlist: 00031.mpls) V:1 A:7  PG:11 IG:1  SV:0 SA:0
+index:   2 duration: 03:47:40 chapters:  36 angles:  1 clips:   6 (playlist: 00027.mpls) V:1 A:7  PG:11 IG:1  SV:0 SA:0
+index:   3 duration: 00:45:32 chapters:   8 angles:  1 clips:   2 (playlist: 00044.mpls) V:1 A:7  PG:11 IG:1  SV:0 SA:0
+index:   4 duration: 00:45:32 chapters:   8 angles:  1 clips:   2 (playlist: 00042.mpls) V:1 A:7  PG:11 IG:1  SV:0 SA:0
+index:   5 duration: 00:45:33 chapters:   8 angles:  1 clips:   2 (playlist: 00041.mpls) V:1 A:7  PG:11 IG:1  SV:0 SA:0
+
+$ bd_splice -t 4 /dev/sr0 ./track4.m2ts
+</code></pre>
+
+<h2>extract (ffmpeg style)</h2>
+
+<pre><code>$ ffmpeg -playlist 31 -i bluray:/dev/sr0 \
+  -c:v copy -c:a copy -c:s copy \
+  -map ß:v -map 0:a -map 0:s \
+  -metadata:s:a:0 title="$title" -metadata:s:a:0 laguage="$iso-code" \
+  -metadata:s:s:0 title="$title" -metadata:s:s:0 laguage="$iso-code" -metadata:s:s:0 handler="$handler" \
+  -t "00:45:33" \
+  playlist31.mkv
+</code></pre>
+
+</div><div id="sysops.md" class="text">
+<h1>install graylog</h1>
+
+<pre><code>apt-get install apt-transport-https uuid-runtime pwgen dirmngr gnupg wget
+</code></pre>
+
+<h2>install java</h2>
+
+<pre><code>apt-get install openjdk-11-jre-headless
+
+cat &gt; /etc/security/limits.d/java.conf &lt;&lt;EOF
+*   soft    nofile          65536
+*   hard    nofile          65536
+EOF
+</code></pre>
+
+<h2>install mongodb</h2>
+
+<pre><code>wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
+
+echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" &gt; /etc/apt/sources.list.d/mongodb-org-4.2.list
+apt-get update
+apt-get install mongodb-org
+
+systemctl enable mongod.service
+
+# required for graylog to work
+mongo --eval " db.adminCommand( { setFeatureCompatibilityVersion: \"4.0\" } ) "
+</code></pre>
+
+<h2>install elasticsearch</h2>
+
+<pre><code>wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main" &gt; /etc/apt/sources.list.d/elastic-6.x.list
+apt-get update
+
+apt-get install elasticsearch-oss
+</code></pre>
+
+<p>configure elasticsearch</p>
+
+<pre><code>vim /etc/elasticsearch/elasticsearch.yml
+cluster.name: graylog
+action.auto_create_index: false
+</code></pre>
+
+<h2>install graylog</h2>
+
+<pre><code>wget https://packages.graylog2.org/repo/packages/graylog-3.2-repository_latest.deb
+dpkg -i graylog-3.2-repository_latest.deb
+apt-get update
+
+# install plugins if necessary
+apt-get install graylog-server \
+  graylog-enterprise-plugins \
+  graylog-integrations-plugins \
+  graylog-enterprise-integrations-plugins
+
+systemctl enable graylog-server.service
+systemctl start graylog-server.service
+</code></pre>
+
+<h1>journald remote logging</h1>
+
+<h2>receiving server</h2>
+
+<pre><code>apt-get install systemd-journal-remote
+systemctl enable systemd-journal-remote.socket
+systemctl start systemd-journal-remote.socket
+
+cp /lib/systemd/system/systemd-journal-remote.service /etc/systemd/system/systemd-journal-remote.service
+sed -i "s/https/http/" /etc/systemd/system/systemd-journal-remote.service
+</code></pre>
+
+<h2>sending server</h2>
+
+<pre><code>apt-get install systemd-journal-remote
+systemctl enable systemd-journal-upload
+systemctl start systemd-journal-upload
+</code></pre>
+
+<p>/etc/systemd/journal-upload.conf:</p>
+
+<pre><code>[Upload]
+URL=http://a.b.c.d:19532
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

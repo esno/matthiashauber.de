@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Software</a> » <span>rluksd</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="README.md" class="text">
+<h1>rLUKSd</h1>
+
+<p>rLUKSd is written to control luks (linux unified key setup) containers remotely.
+It uses udp datagrams to make it harder for network scanners to detect an internet
+facing system.</p>
+
+<p>It's running completely in silent mode. That means it's waiting for authentication
+messages containing a valid signature. After the message signature verification,
+a random key for symmetric encryption/decryption will be generated and send to the client.
+The shared secret will be encrypted by an asymmetric encryption using the same public key
+as for signature verification.</p>
+
+<p>After a succcessful key exchange the client is allowed to request information about the state
+of luks containers and can send a key to decrypt one of them.</p>
+
+<p>rluksd provides a lean way to secure your data on remote machines like servers hosted in any kind
+of datacenter. It's designed to prevent opening ssh for the public and aimes to use as less
+dependencies as possible.</p>
+
+<p>Last but not least the whole rluksd setup is shipped in two separated binaries to ensure
+that only the part that requires root privileges runs as root. The network communication
+can be done in an unprivileged user context.</p>
+
+<h2>Benefits</h2>
+
+<ul>
+    <li>each peer has it's own shared secret</li>
+    <li>package replay protection by using nonce for authentication</li>
+    <li>no broadcasting (it only responds to authenticated peers when they requesting something</li>
+    <li>privilege separation</li>
+    <li>less dependencies</li>
+</ul>
+
+<h2>Build</h2>
+
+<pre><code>git clone https://github.com/esno/rluksd.git
+mkdir build; cd build
+cmake .. &amp;&amp; make
+</code></pre>
+
+<h2>Components</h2>
+
+<h3>luksd</h3>
+
+<p>luksd is the container management daemon. It opens an <code>unix socket</code> and waits for incoming requests.
+It is a seperate daemon to avoid running an application as root that will be available through the
+internet.</p>
+
+<h4>usage</h4>
+
+<pre><code>./luksd &lt;socketOwner&gt; &lt;socketGroup&gt; [&lt;socket&gt;]
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

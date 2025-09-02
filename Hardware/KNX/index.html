@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Hardware</a> » <span>KNX</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a><a class="sidelink" href="KNXnet IP/">KNXnet IP</a><a class="sidelink" href="Siemens KNX-IP Router/">Siemens KNX-IP Router</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>KNX (Konnex)</h1>
+
+<h2>Devices</h2>
+
+<p>Each KNX-device has it's own individual address (unique identifier).
+Addresses are represented by two octets:</p>
+
+<pre><code>| device high octet | device low octet |
+| 1 byte            | 1 byte           |
+</code></pre>
+
+<h3>Device high octet</h3>
+
+<pre><code>| area code | line code |
+| 4 bit     | 4 bit     |
+</code></pre>
+
+<h3>Device low octet</h3>
+
+<p>The entire device low octet represents the device address.</p>
+
+<h3>Notation</h3>
+
+<p>Pattern for an individual device address is <code>A.L.D</code>.</p>
+
+<p>Values for <code>A</code> (area) and <code>L</code> (line) can be 0-15 (<code>2^4 = 16</code>)
+while value for <code>D</code> (device) can be 0-255 (<code>2^8 = 256</code>).</p>
+
+<blockquote>
+    <p>The address <code>0.0.0</code> is technically possible but not allowed by convention.</p>
+</blockquote>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

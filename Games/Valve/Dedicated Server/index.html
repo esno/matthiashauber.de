@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Games</a> » <a href="../">Valve</a> » <span>Dedicated Server</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>Setup a dedicated server</h1>
+
+<p>To run a CS or DoD server ensure that SteamCMD is installed.
+A installation guide can be found <a href="../SteamCMD">here</a>.</p>
+
+<h2>Steam App IDs</h2>
+
+<pre><code>| Name                   | Game    | Engine | AppId  |
+| ---------------------- | ------- | ------ | ------ |
+| Counter-Strike 1.6     | cstrike | hlds   |     90 |
+| Counter-Strike: Source | cstrike | srcds  | 232330 |
+| Day of Defeat: Source  | dod     | srcds  | 232290 |
+</code></pre>
+
+<h2>fetch dedicated server software</h2>
+
+<pre><code>mkdir -p /opt/{hlds,srcds}
+chown steam:steam /opt/{hlds,srcds}
+su -l steam
+
+export STEAMAPPID="232330"
+export STEAMPORT="27015"
+export STEAMENGINE="srcds"
+
+steamcmd.sh +login anonymous \
+  +force_install_dir /opt/${STEAMENGINE}/${STEAMPORT} \
+  +app_update ${STEAMAPPID} +quit
+</code></pre>
+
+<h2>start hlds server</h2>
+
+<p>To run the dedicated server just create a <a href="https://github.com/flakispace/ops/blob/master/applications/steam/hlds%40.service">systemd service file</a>.</p>
+
+<pre><code>wget https://github.com/flakispace/ops/raw/master/applications/steam/hlds%40.service -O /etc/systemd/system/hlds\@.service
+
+export STEAMPORT="27015"
+
+systemctl enable hlds@${STEAMPORT}.service
+systemctl start hlds@${STEAMPORT}.service
+</code></pre>
+
+<p>Additionally create a file <code>/etc/default/hlds-${STEAMPORT}</code> and set the variables to your needs</p>
+
+<pre><code>OPTIONS="-game cstrike -maxplayers 20"
+CONSOLE="+map de_dust2"
+</code></pre>
+
+<blockquote>
+    <p>see the games table above to find proper values for <code>-game</code> argument</p>
+</blockquote>
+
+<h2>start srcds server</h2>
+
+<p>To run the dedicated server just create a <a href="https://github.com/flakispace/ops/blob/master/applications/steam/srcds%40.service">systemd service file</a>.</p>
+
+<pre><code>wget https://github.com/flakispace/ops/raw/master/applications/steam/srcds%40.service -O /etc/systemd/system/srcds\@.service
+
+export STEAMPORT="27015"
+
+systemctl enable srcds@${STEAMPORT}.service
+systemctl start srcds@${STEAMPORT}.service
+</code></pre>
+
+<p>Additionally create a file <code>/etc/default/srcds-${STEAMPORT}</code> and set the variables to your needs</p>
+
+<pre><code>OPTIONS="-game cstrike -ip 0.0.0.0"
+CONSOLE="+maxplayers 20 +map de_dust2"
+</code></pre>
+
+<blockquote>
+    <p>see the games table above to find proper values for <code>-game</code> argument</p>
+</blockquote>
+
+<h2>hlds server configuration</h2>
+
+<p>For the generic server configuration create a new <code>server.cfg</code></p>
+
+<pre><code># region (3 = europe)
+sv_region 3
+
+# name of server
+hostname "my awesome dedicated server"
+
+# password
+sv_password "hello world"
+
+# rcon password
+rcon_password "do not share"
+</code></pre>
+
+<h2>srcds server configuration</h2>
+
+<p>For the generic server configuration create a new <code>cfg/server.cfg</code></p>
+
+<pre><code># local or public
+sv_lan 0
+
+# region (3 = europe)
+sv_region 3
+
+# name of server
+hostname "my awesome dedicated server"
+
+# password
+sv_password "hello world"
+
+# rcon password
+rcon_password "do not share"
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

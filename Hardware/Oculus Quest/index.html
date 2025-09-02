@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Hardware</a> » <span>Oculus Quest</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="oculus-quest.md" class="text">
+<h1>Oculus Quest</h1>
+
+<h2>Facebook</h2>
+
+<p>At the time of purchase the Oculus Quest it was not required to own a facebook account.
+Meanwhile it's - unfortunatelly - required to have one. Since that decision were made
+some may cry and remember to promises made by Oculus founder Palmer Luckey.
+But all I found was a guarantee on <a href="https://www.reddit.com/r/oculus/comments/21cy9n/the_future_of_vr/cgbz2vw?utm_source=share&amp;utm_medium=web2x&amp;context=3">reddit</a>
+only related to Oculus Rift. Beside of that, facebook changed the game and theres nothing to add.</p>
+
+<h2>Hardware</h2>
+
+<pre><code>Processor       : AArch64 Processor rev 4 (aarch64)
+processor       : 0
+BogoMIPS        : 38.40
+Features        : fp asimd evtstrm aes pmull sha1 sha2 crc32
+CPU implementer : 0x51
+CPU architecture: 8
+CPU variant     : 0xa
+CPU part        : 0x801
+CPU revision    : 4
+
+Hardware        : Qualcomm Technologies, Inc APQ8998
+</code></pre>
+
+<h2>First steps</h2>
+
+<p>Install the Oculus smartphone app and pair the device via bluetooth.</p>
+
+<h3>Developer mode</h3>
+
+<p>The Oculus Quest provides a developer mode for developing applications.
+To enable the developer mode browse to <a href="https://dashboard.oculus.com/organizations/create/">Oculus Dashboard</a>
+and create a new organization.</p>
+
+<blockquote>
+    <p>facebook's NDA is a nightmare. Think about it.</p>
+</blockquote>
+
+<p>Open the app, select the Oculus Quest, go to settings and enable "Developer mode"</p>
+
+<p>In some place of the agreements there was a note about potential account locking
+based on non-defined activities. As for now I'm pretty not sure what may end in a account lock
+and how they're monitoring such things.
+Maybe it's only related to online activities like cheating. Maybe it's based on an stuff you wrote that becomes popular.</p>
+
+<h2>Android Debug Bridge</h2>
+
+<pre><code># adb devices
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+List of devices attached
+XXXXXXXXXXXXXX  unauthorized
+</code></pre>
+
+<p>If your device is listed as unauthorized you need to allow usb debugging.
+Put on your headset and allow debugging</p>
+
+<pre><code>Allow USB debugging?
+
+The computers RSA key fingerprint is:
+[...]
+
+[] Always allow from this computer
+[cancel] [ok]
+</code></pre>
+
+<p>Now your Oculus Quest should be listed as device</p>
+
+<pre><code>[root@abacus crito]# adb devices
+List of devices attached
+XXXXXXXXXXXXX  device
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

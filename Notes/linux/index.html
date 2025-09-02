@@ -1,0 +1,399 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Notes</a> » <span>linux</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a><a class="sidelink" href="gentoo/">gentoo</a><a class="sidelink" href="kernel/">kernel</a><a class="sidelink" href="ubuntu/">ubuntu</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="avahi.md" class="text">
+<h1>avahi</h1>
+
+<h2>disable broadcasting</h2>
+
+<pre><code># /etc/avahi/avahi-daemon.conf
+# If enabled, no user service will ever be published
+disable-user-service-publishing=yes
+
+# The safest option, puts Avahi in a browse-only mode
+disable-publishing=yes
+</code></pre>
+
+</div><div id="bchunk.md" class="text">
+<h1>convert cue/bin to iso</h1>
+
+<pre><code>bchunk image.bin image.cue image.iso
+</code></pre>
+
+</div><div id="ext4.md" class="text">
+<h1>File restoration</h1>
+
+<p>Backup your journal</p>
+
+<pre><code>debugfs -R "dump &lt;8&gt; /tmp/ext4.journal" /dev/mapper/vg0-home
+debugfs 1.45.5 (07-Jan-2020)
+</code></pre>
+
+<p>Umount your disk as soon as possible and do not mount nor fsck it from now on.
+Check when your files were still there</p>
+
+<pre><code>ext4magic /dev/mapper/vg0-home -H -a $(date -d "-24hours" +%s)
+Filesystem in use: /dev/mapper/vg0-home
+
+|-----------c_time  Histogram-----------------  after  --------------------  Fri Sep 10 11:01:57 2021
+1631280357 :        0 |                                                  |   Fri Sep 10 13:25:57 2021
+1631288997 :        0 |                                                  |   Fri Sep 10 15:49:57 2021
+1631297637 :        0 |                                                  |   Fri Sep 10 18:13:57 2021
+1631306277 :        1 |*                                                 |   Fri Sep 10 20:37:57 2021
+1631314917 :   125519 |**************************************************|   Fri Sep 10 23:01:57 2021
+1631323557 :        0 |                                                  |   Sat Sep 11 01:25:57 2021
+1631332197 :        0 |                                                  |   Sat Sep 11 03:49:57 2021
+1631340837 :        0 |                                                  |   Sat Sep 11 06:13:57 2021
+1631349477 :        0 |                                                  |   Sat Sep 11 08:37:57 2021
+1631358117 :        0 |                                                  |   Sat Sep 11 11:01:57 2021
+
+
+|-----------d_time  Histogram-----------------  after  --------------------  Fri Sep 10 11:01:57 2021
+1631280357 :      204 |*                                                 |   Fri Sep 10 13:25:57 2021
+1631288997 :     2642 |*                                                 |   Fri Sep 10 15:49:57 2021
+1631297637 :      639 |*                                                 |   Fri Sep 10 18:13:57 2021
+1631306277 :      447 |*                                                 |   Fri Sep 10 20:37:57 2021
+1631314917 :  1795968 |************************************************* |   Fri Sep 10 23:01:57 2021
+1631323557 :      196 |*                                                 |   Sat Sep 11 01:25:57 2021
+1631332197 :        0 |                                                  |   Sat Sep 11 03:49:57 2021
+1631340837 :        0 |                                                  |   Sat Sep 11 06:13:57 2021
+1631349477 :        0 |                                                  |   Sat Sep 11 08:37:57 2021
+1631358117 :        0 |                                                  |   Sat Sep 11 11:01:57 2021
+
+
+|-----------cr_time Histogram-----------------  after  --------------------  Fri Sep 10 11:01:57 2021
+1631280357 :     2491 |**************************************************|   Fri Sep 10 13:25:57 2021
+1631288997 :     2023 |****************************************          |   Fri Sep 10 15:49:57 2021
+1631297637 :     1742 |***********************************               |   Fri Sep 10 18:13:57 2021
+1631306277 :     2241 |*********************************************     |   Fri Sep 10 20:37:57 2021
+1631314917 :     1969 |***************************************           |   Fri Sep 10 23:01:57 2021
+1631323557 :        0 |                                                  |   Sat Sep 11 01:25:57 2021
+1631332197 :        0 |                                                  |   Sat Sep 11 03:49:57 2021
+1631340837 :        0 |                                                  |   Sat Sep 11 06:13:57 2021
+1631349477 :        0 |                                                  |   Sat Sep 11 08:37:57 2021
+1631358117 :        0 |                                                  |   Sat Sep 11 11:01:57 2021
+ext4magic : EXIT_SUCCESS
+</code></pre>
+
+<p>List files within this point of time</p>
+
+<pre><code>ext4magic /dev/mapper/vg0-home -a 1631306277 -f / -l
+</code></pre>
+
+<p>Now restore your files</p>
+
+<pre><code>ext4magic /dev/mapper/vg0-home -j /tmp/ext4.journal -M -d /mnt -a 1631306277
+</code></pre>
+
+</div><div id="ffmpeg.md" class="text">
+<h1>ffmpeg</h1>
+
+<h2>capture screen</h2>
+
+<pre><code>ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 \
+  -c:v libx264 -qp 0 -preset ultrafast \
+  output.mkv
+</code></pre>
+
+</div><div id="generic.md" class="text">
+<h1>cpio</h1>
+
+<h2>extract cpio.gz initrams</h2>
+
+<pre><code>gunzip -c initram.cpio.gz | cpio -idv
+</code></pre>
+
+</div><div id="iomem.md" class="text">
+<h1>Dumping BIOS</h1>
+
+<p>A short investigation in x86 architecture states out that the very first bytes in memory address are
+more or less standardized and linux kernel provides <code>/proc/iomem</code> as the systems memory map.</p>
+
+<pre><code>grep ROM /proc/iomem
+000f0000-000fffff : System ROM
+</code></pre>
+
+<p>So that map shows that System ROM is located at registers mapped to address space <code>0x000f0000</code> to <code>0x000fffff</code>
+which should be the case for most x86 devices because this seems to be x86 architecture specific.</p>
+
+<p>Well, the address space reserved for System ROM is 64k (65535). Since System ROM starts
+at <code>0x000f0000</code> we have to skip the first 15 blocks and dump the whole 64k.</p>
+
+<pre><code>dd if=/dev/mem of=/tmp/pcbios.rom bs=64k skip=15 count=1
+</code></pre>
+
+<p>One may experience access permission issues like</p>
+
+<pre><code>dd if=/dev/mem of=/tmp/pcbios.rom bs=64k skip=15 count=1
+dd: reading `/dev/mem': Operation not permitted
+</code></pre>
+
+<p>which I faced e.g. on Ubuntu 20.04. I'm pretty not sure which subsystem blocked that access and
+I was too lazy to dig into it just for the sake. I'm not using Ubuntu that much but it's
+perfect when it comes to compatibility tests on new bought hardware. If one figures out whether
+it was a kernel lockdown or something else please spot that out and I will come back to it.</p>
+
+<p>As for now I know it's unrelated to <code>CONFIG_DEVMEM_STRICT</code> which I already disabled on boot via
+appending <code>strict-devmem=0</code> to kernel arguments line. Afterwards I noticed that a strict devmem
+module should restrict access while reading more than 1MB from <code>/dev/mem</code>. We're reading 64k.</p>
+
+<p>Nevertheless I switched over to another live distro that's more - let's say - developer friendly
+in that specific case and tried it again.</p>
+
+</div><div id="ip.md" class="text">
+<h1>ip utils</h1>
+
+<h2>rename interfaces on the fly</h2>
+
+<pre><code>ip link set &lt;iface&gt; down
+ip link set &lt;iface&gt; name new0
+ip link set &lt;iface&gt; up
+</code></pre>
+
+<h1>bond interfaces</h1>
+
+<h2>add interface to bond</h2>
+
+<pre><code>ifenslave bond0 eth0
+</code></pre>
+
+<h2>drop interface from bond</h2>
+
+<pre><code>ifenslave -d bond0 eth0
+</code></pre>
+
+</div><div id="lvm.md" class="text">
+<h1>lvm</h1>
+
+<h2>mounting partitions inside of a lv</h2>
+
+<pre><code>kartpx -a /dev/mapper/vg0-lvname
+losetup /dev/loop0 /dev/mapper/vg0-lvname1
+mount /dev/loop0 /mnt
+
+# other way around
+umount /dev/loop0
+losetup -d /dev/loop0
+kpartx -d /dev/mapper/vg0-lvname
+</code></pre>
+
+</div><div id="mdadm.md" class="text">
+<h1>mdadm</h1>
+
+<h2>increase sync speed</h2>
+
+<pre><code>cat /proc/sys/dev/raid/speed_limit_min
+1000
+cat /proc/sys/dev/raid/speed_limit_max
+200000
+
+echo 400000 &gt; /proc/sys/dev/raid/speed_limit_min
+echo 400000 &gt; /proc/sys/dev/raid/speed_limit_max
+</code></pre>
+
+</div><div id="mdev.md" class="text">
+<h1>mdev</h1>
+
+<h2>autoload</h2>
+
+<pre><code>/usr/bin/find /sys -name 'modalias' -type f -exec /usr/bin/sort -u {} \; \
+    | /usr/bin/xargs /sbin/modprobe -b -a 2&gt;/dev/null
+</code></pre>
+
+</div><div id="networkmanager.md" class="text">
+<h1>NetworkManager</h1>
+
+<h2>Disable connectivity checks</h2>
+
+<p>NetworkManager is calling a public webservice on a regular basis to check
+whether your network connection has internet connectivity or not.</p>
+
+<p>One may not want to tell people outside about your presence and therefore might
+want to disable this check.</p>
+
+<pre><code>cat &gt;&gt; /var/lib/NetworkManager/NetworkManager-intern.conf &lt;&lt;EOF
+[connectivity]
+.set.enabled=false
+EOF
+</code></pre>
+
+</div><div id="screen.md" class="text">
+<h1>screen</h1>
+
+<h2>keyboard shortcuts</h2>
+
+<pre><code>| shortcut       | description               |
+| -------------- | ------------------------- |
+| ctrl+a shift+f | resize window             |
+| ctrl+a shift+s | split window              |
+| ctrl+a tab     | switch window             |
+| ctrl+a esc     | enable buffer scroll mode |
+</code></pre>
+
+</div><div id="udev.md" class="text">
+<h1>dealing with device node permissions</h1>
+
+<pre><code>SUBSYSTEMS=="usb", ATTRS{idVendor}=="1234", ATTRS{idProduct}=="1234", GROUP="users", MODE="660"
+</code></pre>
+
+<h1>predictable network interface names</h1>
+
+<p>how to use oldschool interface names</p>
+
+<pre><code># cmdline
+net.ifnames=0 (might also need biosdevname=0)
+
+# since v209
+ln -s /dev/null /etc/udev/rules.d/80-net-setup-link.rules
+
+# before v209 / eudev
+ln -s /dev/null /etc/udev/rules.d/80-net-name-slot.rules
+</code></pre>
+
+</div><div id="valgrind.md" class="text">
+<h1>analyze memory leaks</h1>
+
+<pre><code>valgrind --leak-check=full \
+  --show-leak-kinds=all \
+  --track-origins=yes \
+  --verbose \
+  --log-file=/tmp/memleak.log \
+  ./binary [args]
+</code></pre>
+
+</div><div id="wireguard.md" class="text">
+<h1>wireguard</h1>
+
+<h2>mobile deployment</h2>
+
+<pre><code>qrencode -t ansiutf8 &lt; wg0.conf 
+█████████████████████████████████████████████████████████████████
+█████████████████████████████████████████████████████████████████
+████ ▄▄▄▄▄ █ ▀▄ ▀█▄ ▀██  ▄▀ ▀▀▄▄▀█▄█▀███▀ ██▀▄▄█  ▄ ██ ▄▄▄▄▄ ████
+████ █   █ ██▄▀▀▄▀▄ █▀ ▄██▀ █ ▄▀▄ ▄▄▄▄▀▄▄ █▀▄ ▀▀█▀▄ ██ █   █ ████
+████ █▄▄▄█ █  ▄▀ ▄▀ ▄▄▀█▀█  ▄▄ ▄▄▄ ██▄▄▄▄▄▄█▄▄ ██▀▀▄██ █▄▄▄█ ████
+████▄▄▄▄▄▄▄█ ▀▄▀ ▀ █▄▀▄▀ █ █▄█ █▄█ ▀▄▀ █▄█ ▀▄▀ ▀▄▀ █ █▄▄▄▄▄▄▄████
+████▄▄ ▀█▄▄▀▄ █▀▀ ▄█▄▄▄█ ▀▄▀ █ ▄▄ ▄ ▄▀▄█▄ █  █▄ ▀▄ █▄▄   █▀ ▄████
+███████▀▄▄▄▄█ █▄ █▀   ▄  █▀▀ █▄▄▄▀  ▄▄▄█▀█▄▄▀█▄ ▀█ █▀█ ▄▀▀█▄█████
+████▄▀ █▀▄▄  ▄ ▄▄███  ▄▄▄██▄▄▄▄▀▀ ▀▄▀▀▀▄▄▄▄▀███ ▀ █▄▄▀▄█ ▄▄▀█████
+████▀  ▄▀▀▄  █▀▄█ ██▀ ▀█  ▀██▄▀▄█▄ ▄ █▀▄ ▄█▄ ▄█▄█▄▄▀  ▀▄▄ ▄▀ ████
+████▄▀▄▄▀▀▄▀▀ ▀███▄▄█▀  █ █▀█▄ █▀█▀▀▄▀▄  ▀▄ ▀▀ ▀▀▀█▀▄█▄███  █████
+████ █ █▄█▄██▀ ▄▄ ▄██ ██   █▀█▀▀█▄█ ▀▄▀▄▀▄█▄█▄▀ ▀▄██  ▄▀█▀▄█▄████
+████▀█ █▄▄▄ ▄ ██▀ ▄  ▄▄█▄▄   ▀ ▀▀██ ▀██    ▀▄██▀▄ ▄▄█ █ ▀▄▀ ▄████
+█████▄███▀▄█ █ █▄▀▀ ▀ ▀█▄██ ▀ ▀ ▀▄▀▄█▄▄██  ▀▄▄█▀▄▀ ██▄█▄▀▀ ▀▄████
+████▄▀█▄ █▄ ▄▄ ▀▄▀█▀▄ █▀▄ ██▄▄▄▀██▀█▀▄▀▄▄█ █▄ ▀▀▄  ▄▀ ▀  ▄ ▀▄████
+████ █   ▄▄▄ █▄▄█▄▀█▀█▀▄  ▄▄   ▄▄▄ ██▄  ██ ▄██▄ ▀█▄▀ ▄▄▄ ▀▄▀▀████
+████▄ ▀█ █▄█ ▄▄▀ ▀▀▄▀██   ▄ ▄▀ █▄█ █▄ ▄▀▄▄█ ▄▄▄▀ ▀▄▄ █▄█ ▄█ █████
+████▀▀ ▀▄ ▄  ██ ▀▀▀█▀ ▀█▀ ▄█▀█▄▄  ▄ ▄█  ▄▄  ▀█▀▄ ▄██ ▄ ▄  ▀ ▀████
+████▀▀▄ ▄▄▄▄▀▀█▄▄   ▄▄   █   ▀ ▄█ ▄ ▀██▀ █▀▀ █▄  ▀█▄▀ ▀▀██   ████
+█████▄█ ▄▄▄▄▄ █▀ ▀ █▀ ▄█▀ ▀██  █▀ ▄▄███▄    █▄▄▄▀▄▄▄██▄▀▄██▀█████
+█████▀  ▄▄▄█ ▄▄ ▄▀▀█▄█▀  ▄ █▄▄▀█▄  ▀ ▀▄▄▄▄  █ ██ ▄█▄ ▀█▄ ▀▀ █████
+████  ▄ ▄▄▄ ▄ █ ▀█▀█▄ █ ▀ ██▄▄▄█▄▄  ▄██▄▄▄▀ █▄  ▄▄ ▄██▄  ▄▀▄▄████
+████▀▀█  ▀▄█ ▄ █ ▀▀▀▄▀▄▀▄▀▄ ▄▄ █▄ ▀ ▄▄▄▀ ▀▄▄▄▀▄ ▄ █▀█ ▄▄█   ▄████
+███████▀██▄▀ ▄▄██▀█▄  ▄▀ █▀▀▀     █ ▄▄▄██ ▄▀█▀ █▀▀▄█▄█ █▀ █ ▀████
+████▄▄ ▀█ ▄▄ ▀██ ▀ ▀█ ▄▄████ ▄ ▄█ █▄▄▄▀▄▀▀▄ ▀█▄▀  ▄▀▄▄█▄██▀▄█████
+████ ▀ ▀▀▄▄▄▀▀█▀▀▀ █▀ ▀█▀ ▀▄▀▄▄██ ▄▄ ▄  █▄▄▄▄▄█ ▄▄▀  ▀▄██▄▀ ▀████
+██████████▄█ █▀ ▀▄█ █ █▄█▀▄ ▀  ▄▄▄   ▀█  █▀▀▀▀ █ ██  ▄▄▄ ▄ ▄▀████
+████ ▄▄▄▄▄ █▀▄▄ █ ██   █▀▄ █▄█ █▄█  ██▀▄▀▄▀ ▄▄▀ ▀█ █ █▄█ ▀█  ████
+████ █   █ ██▄ ▄▄█▀  ███▄▀▄  ▄  ▄   ▀█▄▀▄▄█▄▄▄▀█▄▀█ ▄▄▄▄ ▀▀▄▄████
+████ █▄▄▄█ █  █▀█ █ ▀█▀█▄ █ ▀▄██  ▀▄▄  ▄▄▄  ▄▄ ▀▄ ▀▄▀███▄ ▄▄▄████
+████▄▄▄▄▄▄▄█▄▄██▄▄▄█▄▄▄█▄██▄▄▄▄▄█▄▄██▄█▄▄▄▄█▄█▄██▄▄▄▄▄██▄▄▄█▄████
+█████████████████████████████████████████████████████████████████
+█████████████████████████████████████████████████████████████████
+</code></pre>
+
+
+</div><div id="wireshark.md" class="text">
+<h1>usb device reverse engineering</h1>
+
+<pre><code>modprobe usbmon
+
+# determine usbmon interface and device address
+lsusb | grep "&lt;vendorId&gt;:&lt;productId&gt;" | awk -F ':' '{ print $1 }'
+</code></pre>
+
+<h2>wireshark</h2>
+
+<p>Capture traffic on <code>usbmonX</code> where X is the busId. Set the filter for your device
+via <code>usb.bus_id == &lt;busId&gt; and usb.device_address == &lt;deviceAddr&gt;</code></p>
+
+<p>Setup windows virtual machine, passthrough usb device and install driver and corresponding software.
+Now trigger actions while <code>wireshark</code> is capturing traffic at linux level.</p>
+
+</div><div id="xorg.md" class="text">
+<h1>xorg</h1>
+
+<h2>X composite extension</h2>
+
+<p>the protocol specifies that the returned version will never be higher
+then the one requested.</p>
+
+<pre><code>int major = 0, minor = 2;
+XCompositeQueryVersion(dpy, &amp;major, &amp;minor);
+</code></pre>
+
+<h3>feature matrix</h3>
+
+<pre><code>| version | NameWindowPixmap |
+| ------- | ---------------- |
+| 0.2     | x                |
+</code></pre>
+
+</div><div id="zsh.md" class="text">
+<h1>aliases &amp; functions</h1>
+
+<pre><code># usage: eol &lt;file&gt;
+function eol() {
+  if [ -n "$(tail -c1 ${1})" ]; then echo "file has no eol"; return 1; fi
+}
+
+# usage: lxenter &lt;lxc&gt; [&lt;user&gt;]
+function lxenter() {
+  if [ "${1}" = "" ]; then echo "USAGE: lxenter &lt;lxc&gt; [&lt;user&gt;]"; return 1; fi
+  RUN="lxc-attach -n ${1} -- /bin/su -l ${2}"
+  if (( EUID != 0 )); then RUN="su -c '${RUN}'"; fi
+  eval ${RUN}
+}
+
+# usage: pwgen [&lt;len&gt;]
+function pwgen() {
+  &lt; /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32}; echo;
+}
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Notes</a> » <a href="../">linux</a> » <span>gentoo</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>gentoo</h1>
+
+<h2>Desktop using systemd</h2>
+
+<h3>Full disk-encryption</h3>
+
+<pre><code>cat &gt; /etc/portage/package.use/dracut &lt;&lt;EOF
+sys-apps/systemd cryptsetup
+EOF
+
+emerge -avuNDq world
+emerge -avq dracut
+</code></pre>
+
+<p>If you're installing gentoo from another live-cd than gentoo you may need to
+add <code>--kver &lt;kernel-version&gt;</code> and <code>--no-hostonly</code> to dracut command.</p>
+
+<pre><code>dracut -f
+</code></pre>
+
+<p>Dracut requires some arguments added to the kernel arguments line to identify
+the LUKS partition and rootfs.</p>
+
+<pre><code>root=UUID=&lt;uuid-of-rootfs&gt;
+rd.luks.uuid=luks-&lt;uuid-of-luks-container&gt;
+rd.lvm.vg=&lt;lvm-vg-name&gt;
+</code></pre>
+
+<h4>Dracut keymap</h4>
+
+<p>Dracut should use <code>/etc/vconsole.conf</code> of your rootfs to identify a proper keymap.
+Unfortunatelly it seems like there is a bug where Dracut auto-generates this file
+on boot and ignores your host-specific settings. To enforce a specific keymap
+Dracut will also read the kernel arguments line for a option named <code>rd.vconsole.keymap</code>
+which can be set to the same value as in <code>/etc/vconsole.conf</code></p>
+
+<pre><code>rd.vconsole.keymap=de
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

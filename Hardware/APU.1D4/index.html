@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Hardware</a> » <span>APU.1D4</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="apu-1d4.md" class="text">
+<h1>APU.1D4</h1>
+
+<h2>hardware</h2>
+
+<pre><code>CPU: AMD T40E (2 x 1,0 GHz)
+RAM: 4GB (DDR3-1066 DRAM)
+
+Connector:  3 x Realtek RTL8111E Gigabit
+            1 x mSATA 6 GBit/s
+            1 x SATA 6 GBit/s
+            2 x miniPCIe for mSATA
+            1 x miniPCIe for gsm/umts/lte (optional)
+            1 x miniPCIe for wifi (optional)
+            2 x USB2.0 (internal)
+            2 x USB2.0 (external)
+            1 x RS232 (serial console)
+
+BIOS: Coreboot Open Source System BIOS
+
+Power Supply: 12V / 2.0A (5.5mm/2.5mm)
+</code></pre>
+
+<h2>OPNsense</h2>
+
+<p>The APU.1D4 board is nice for a semi-professional firewall. To install <a href="https://www.opnsense.org">OPNsense</a> download the <strong>amd64 serial</strong> image type from the mirror of your choice.</p>
+
+<pre><code>$ screen /dev/ttyUSB0 115200
+# login with root / opnsense
+# press 8 for shell
+/usr/local/etc/rc.installer
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

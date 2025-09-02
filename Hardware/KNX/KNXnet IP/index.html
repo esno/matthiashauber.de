@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../../">welcome!</a> » <a href="../../">Hardware</a> » <a href="../">KNX</a> » <span>KNXnet IP</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="protocol.md" class="text">
+<h1>KNXnet/IP</h1>
+
+<p>KNXnet/IP is a UDP/multicast based protocol. It's default port is <code>3671</code>.
+It's used to connect and extend KNX lines over IP networks.</p>
+
+<p>Additionally it can be used to add complex logic via applications that are not
+directly interfaced with KNX.</p>
+
+<h2>Protocol</h2>
+
+<h3>Header</h3>
+
+<pre><code>| length | version | identifier | Total length |
+| 1 byte | 1 byte  | 2 byte     | 2 byte       |
+</code></pre>
+
+<h4>Length</h4>
+
+<p>Length is the size of the header within the UDP datagram.</p>
+
+<h4>Version</h4>
+
+<p>Describes the protocol version that is used.</p>
+
+<p>Known versions:</p>
+
+<pre><code>| hex  | version |
+| ---- | ------- |
+| 0x10 | 1.0     |
+</code></pre>
+
+<h4>Identifier</h4>
+
+<p>The identifier (also known as Service Identifier) defines the message type
+that is sent.</p>
+
+<p>Known identifier:</p>
+
+<pre><code>| hex    | type                          |
+| ------ | ----------------------------- |
+| 0x0201 | Search Request                |
+| 0x0202 | Search Response               |
+| 0x0203 | Description Request           |
+| 0x0204 | Description Response          |
+| 0x0205 | Connect Request               |
+| 0x0206 | Connect Response              |
+| 0x0207 | Connection State Request      |
+| 0x0208 | Connection State Response     |
+| 0x0209 | Disconnect Request            |
+| 0x020a | Disconnect Response           |
+| 0x020b | Search Request Extended       |
+| 0x0310 | Configuration Request         |
+| 0x0311 | Configuration Acknowledgement |
+| 0x0420 | Tunneling Request             |
+| 0x0421 | Tunneling Acknowledgement     |
+| 0x0530 | Routing Indication            |
+</code></pre>
+
+<h4>Total length</h4>
+
+<p>The total length describes the length of the whole UDP datagram (incl. header).</p>
+
+<blockquote>
+    <p>payload length = total length - header length</p>
+</blockquote>
+
+<h2>Tunnel Protocol</h2>
+
+<p>While using a direct connection to a KNXnet/IP device one has to handle connection pools
+as well as different channels assigned by the IP router.</p>
+
+<p>Tunnel protocol seems quiet similar to the default protocol except that all messages contain
+a channel id that needs to be requested for different purposes.</p>
+
+<pre><code>| header  | channel | payload |
+| x bytes | 1 byte  | x byte  |
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

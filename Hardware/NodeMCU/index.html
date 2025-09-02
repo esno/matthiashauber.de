@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Hardware</a> » <span>NodeMCU</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="esp8266.md" class="text">
+<h1>NodeMCU Lolin V3 (ESP8266)</h1>
+
+<h2>hardware</h2>
+
+<pre><code>CPU: Tensilica Xtensa L106 32bit RISC (max. 160 MHz)
+RAM: &lt;50 kB
+
+Features: 802.11 b/g/n (WPA/WPA2)
+          SDIO 2.0, SPI, UART, I2C, I2S, IRDA, PWM, GPIO
+          UART/USB converter
+
+Operating temperature range: -40°C ~ 125°C
+</code></pre>
+
+<h3>pins</h3>
+
+<pre><code>| label | description   |    | label | description           |
+| ----- | ------------- |    | ----- | --------------------- |
+| A0    | ADC0 / TOUT   |    | D0    | gpio16 / user / wake  |
+| G     | ground        |    | D1    | gpio5                 |
+| VU    | USB power out |    | D2    | gpio4                 |
+| S3    | gpio10 / SDD3 |    | D3    | gpio0 / flash         |
+| S2    | gpio9 / SDD2  |    | D4    | gpio2 / TXD1          |
+| S1    | MOSI / SDD1   |    | 3V    | 3,3 volt              |
+| SC    | CS / SDCMD    |    | G     | ground                |
+| SO    | MISO / SDD0   |    | D5    | gpio14 / HSCLK        |
+| SK    | SCLK / SDCLK  |    | D6    | gpio12 / HMISO        |
+| G     | ground        |    | D7    | gpio13 / RXD2 / HMOSI |
+| 3V    | 3,3 volt      |    | D8    | gpio15 / TXD2 / HCS   |
+| EN    |               |    | RX    | gpio3 / RXD0          |
+| RST   |               |    | TX    | gpio1 / TXD0          |
+| G     | ground        |    | G     | ground                |
+| VIN   | 5 volt in     |    | 3V    | 3,3 volt              |
+</code></pre>
+
+<blockquote>
+    <p>don't power the NodeMCU at VIN while connecting USB
+    people say there is no protection and it may damage
+    your USB chip.</p>
+</blockquote>
+
+<h2>serial console</h2>
+
+<p>The NodeMCU contains a UART/USB converter that should be available as <code>/dev/ttyUSB0</code>.</p>
+
+<pre><code>$ dmesg | grep ttyUSB
+[18253.344433] usb 1-3.2.2: FTDI USB Serial Device converter now attached to ttyUSB0
+[27933.293963] ftdi_sio ttyUSB0: FTDI USB Serial Device converter now disconnected from ttyUSB0
+[185007.815737] usb 1-1.2.2: ch341-uart converter now attached to ttyUSB0
+[185020.515937] ch341-uart ttyUSB0: ch341-uart converter now disconnected from ttyUSB0
+[185026.051659] usb 1-1.2.2: ch341-uart converter now attached to ttyUSB0
+</code></pre>
+
+<p>After identifying the proper serial device we can open a console with <code>115200</code> baudrate.</p>
+
+<pre><code>screen /dev/ttyUSB0 115200
+</code></pre>
+
+<blockquote>
+    <p>At least the default firmware sends a unknown bytestream while initializing the board.
+    As soon as the board is initialized it will print <code>ready</code></p>
+</blockquote>
+
+<h2>toolchain</h2>
+
+<p>install the esptool to communicate with the ROM bootloader of ESP8266</p>
+
+<pre><code># pacman -S esptool
+</code></pre>
+
+<h1>MQ-2 Gas Sensor</h1>
+
+<h2>pins</h2>
+
+<pre><code>| label | description |
+| ----- | ----------- |
+| A0    | analog out  |
+| D0    | digital out |
+| GND   | ground      |
+| VCC   | 5 volt      |
+</code></pre>
+
+<blockquote>
+    <p>digital out will print 0 until threshold value is exceeded
+    threshold can be configured via potentiometer</p>
+</blockquote>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

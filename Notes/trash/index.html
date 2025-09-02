@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Notes</a> » <span>trash</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="systemd.md" class="text">
+<h1>systemd</h1>
+
+<h2>setup dhcp on interface</h2>
+
+<pre><code># /etc/systemd/network/50-dhcp.network
+
+[Match]
+Name=enp1s0
+
+[Network]
+DHCP=ipv4
+</code></pre>
+
+<h2>start network services</h2>
+
+<pre><code>systemctl start systemd-networkd.service
+systemctl start systemd-resolved.service
+</code></pre>
+
+<h2>systemd daemon-reexec</h2>
+
+<p>when systemd service-restart stucks on <code>systemd-tty-ask-password-agent</code></p>
+
+<pre><code>systemctl daemon-reexec
+</code></pre>
+
+<h2>coredumps</h2>
+
+<pre><code># coredump config
+/etc/systemd/coredump.conf.d/
+
+# destination
+/var/lib/systemd/coredump
+</code></pre>
+
+<h2>lid close event handling</h2>
+
+<pre><code># /etc/systemd/logind.conf
+HandleLidSwitch=ignore
+
+systemctl restart systemd-logind.service
+</code></pre>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>

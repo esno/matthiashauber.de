@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="open-source tech stuff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet" />
+  <link href="../../style.css" rel="stylesheet" />
+  <title>matthiashauber - open-source tech stuff</title>
+
+<meta name="google-adsense-account" content="ca-pub-7731755775472874">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7731755775472874"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="viewport">
+      <div class="topbar">
+        <a class="title" href="../../">matthiashauber</a>
+        <span class="description">open-source tech stuff</span>
+      </div>
+      <div class="navigation"><a href="../../">welcome!</a> » <a href="../">Hardware</a> » <span>HmIP-CCU3</span></div>
+    </div>
+  </div>
+
+  <div class="viewport mainview">
+    <div class="directories">
+      <a class="back sidelink" href="../">« Back</a>
+    </div>
+    <div class="page">
+      <div class="content"><div id="readme.md" class="text">
+<h1>HmIP-CCU3</h1>
+
+<h2>About</h2>
+
+<pre><code>Hardware    : BCM2835
+Model       : Raspberry Pi 3 Model B Rev 1.2
+</code></pre>
+
+<h2>Install RaspberryMatic</h2>
+
+<p>download the latest ccu3 image from <a href="https://github.com/jens-maus/RaspberryMatic/releases">github</a>
+and navigate to your CCU3 webui at <code>Settings</code> -> <code>Control Panel</code> -> <code>CCU maintenance</code>.</p>
+
+<p>At <code>CCU software</code> select <code>Choose File</code> and follow the default firmware update procedure.</p>
+
+<blockquote>
+    <p>RaspberryMatic-${version}-ccu3.tgz (only for initial CCU3 Firmware -> RaspberryMatic Upgrade)</p>
+</blockquote>
+
+<h3>Configure wireguard</h3>
+
+<pre><code>mkdir /usr/local/etc/config/wireguard
+icd /usr/local/etc/config/wireguard
+
+wg genkey | tee private.key | wg pubkey &gt; public.key &amp;&amp; chmod 0600 *.key
+vim wg0.conf
+</code></pre>
+
+<h4>Start wireguard</h4>
+
+<pre><code>cat &gt; /usr/local/etc/rc.local &lt;&lt;EOF
+#!/bin/sh
+
+ip link add wg0 type wireguard
+ip addr add a.b.c.d/24 dev wgfin0
+wg setconf wg0 /usr/local/etc/config/wireguard/wg0.conf 
+ip link set wg0 up
+# for each additional subnet listed in `AllowedIPs` a route needs to be set properly
+ip route add x.y.z.0/24 dev wg0
+EOF
+
+chmod +x /usr/local/etc/rc.local
+</code></pre>
+
+<blockquote>
+    <p>Option <code>Address</code> is not valid in wireguards <code>Interface</code> config section</p>
+</blockquote>
+
+</div><div class="footer">September 2025 - powered by <a href="https://github.com/shagu/webls">webls</a></div></div>
+    </div>
+  </div>
+</body>
+
+</html>
